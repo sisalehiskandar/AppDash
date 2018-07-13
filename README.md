@@ -15,29 +15,29 @@ Haven't built electron libraries for each platform yet. You'll have to use the D
 - [x] electron app
 - [x] add query to UI
 - [x] specify dashboard name
-- [] add config to UI
-- [] stylize UI
-- [] add tier to bts
-- [] add a title
-- [] more than just bts
-- [] WHERE on metric values (current art > x)
-- [] WHERE OR operator and nesting
-- [] SORT BY
-- [] LIMIT
-- [] query autocomplete
-- [] query validation
-- [] HR status lights
-- [] create multiple dashboards at once
-- [] save queries
-- [] more metric types: browser, mobile, DB, SIM, IoT
-- [] styling/theming
-- [] add logo
-- [] table grid lines
-- [] help docs
-- [] prebuilt dashboards
-- [] preview dashboard before deploying
-- [] share dashboard formulas
-- [] add more connection options like proxy
+- [x] stylize UI
+- [ ] add config to UI
+- [ ] add tier to bts
+- [ ] add a title
+- [ ] more than just bts
+- [ ] WHERE on metric values (current art > x)
+- [ ] WHERE OR operator and nesting
+- [ ] SORT BY
+- [ ] LIMIT
+- [ ] query autocomplete
+- [ ] query validation
+- [ ] HR status lights
+- [ ] create multiple dashboards at once
+- [ ] save queries
+- [ ] more metric types: browser, mobile, DB, SIM, IoT
+- [ ] styling/theming
+- [ ] add logo
+- [ ] table grid lines
+- [ ] help docs
+- [ ] prebuilt dashboards
+- [ ] preview dashboard before deploying
+- [ ] share dashboard formulas
+- [ ] add more connection options like proxy
 
 ## Development
 
@@ -56,6 +56,7 @@ API
 Libraries
 - [electron](https://electronjs.org/)
 - [electron-react-boilerplate](https://github.com/chentsulin/electron-react-boilerplate)
+- [css-modules](https://github.com/css-modules/css-modules)
 - [request](https://github.com/request/request)
 - [request-promise](https://github.com/request/request-promise)
 - [bluebird](http://bluebirdjs.com/docs/api-reference.html)

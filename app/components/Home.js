@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import { Link } from 'react-router-dom'
-import styles from './Home.css'
+// import styles from './Home.css'
 import main from '../logic/main'
 
 export default class Home extends Component {
@@ -8,8 +8,7 @@ export default class Home extends Component {
     super()
     this.state = { query: '', dashboardName: '', msg: '' }
   }
-  deploy = () => {
-    console.log('deploy')
+  onSubmit = () => {
     const { query, dashboardName } = this.state
     const { msg } = main({ query, dashboardName })
     this.setState({ msg })
@@ -23,25 +22,51 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-        <div className={styles.container} data-tid="container">
-          <div>
-            Dashboard Name
-            <input
-              type="text"
-              onChange={this.setDashboardName}
-              value={this.state.dashboardName}
-            />
+        <div className="container" data-tid="container">
+          <div className="jumbotron">
+            <h1 className="display-4">dash-ql</h1>
+            <p className="lead">Create AppD dashboards at lightning speed</p>
+            <hr className="my-4" />
+            <p>
+              dash-ql uses a SQL-like query language to create table dashboards.
+              Check out the GitHub{' '}
+              <a href="https://github.com/appdynamics/dash-ql">here</a>.
+            </p>
           </div>
-          <div>
-            Query
-            <input
-              type="text"
-              onChange={this.setQuery}
-              value={this.state.query}
-            />
-          </div>
-          <button onClick={this.deploy}>Deploy</button>
           <span>{this.state.msg}</span>
+
+          <form>
+            <div className="form-group">
+              <label htmlFor="dashboardNameInput">Dashboard Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="dashboardNameInput"
+                aria-describedby="emailHelp"
+                placeholder="Enter dashboard name"
+                onChange={this.setDashboardName}
+                value={this.state.dashboardName}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="queryInput">Query</label>
+              <textarea
+                className="form-control"
+                id="queryInput"
+                placeholder="Type in query here"
+                onChange={this.setQuery}
+                value={this.state.query}
+                rows={3}
+              />
+            </div>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onSubmit={this.onSubmit}
+            >
+              Deploy Dashboard
+            </button>
+          </form>
         </div>
       </div>
     )
