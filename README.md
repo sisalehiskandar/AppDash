@@ -13,8 +13,10 @@ Haven't built electron libraries for each platform yet. You'll have to use the D
 - [x] AS
 - [x] WHERE on a name/label with = or REGEX
 - [x] electron app
-- [] add query to UI
+- [x] add query to UI
+- [x] specify dashboard name
 - [] add config to UI
+- [] stylize UI
 - [] add tier to bts
 - [] add a title
 - [] more than just bts
@@ -25,7 +27,6 @@ Haven't built electron libraries for each platform yet. You'll have to use the D
 - [] query autocomplete
 - [] query validation
 - [] HR status lights
-- [] specify dashboard name
 - [] create multiple dashboards at once
 - [] save queries
 - [] more metric types: browser, mobile, DB, SIM, IoT
