@@ -16,7 +16,7 @@ Haven't built electron libraries for each platform yet. You'll have to use the D
 - [x] add query to UI
 - [x] specify dashboard name
 - [x] stylize UI
-- [ ] add config to UI
+- [x] add config to UI
 - [ ] add tier to bts
 - [ ] add a title
 - [ ] more than just bts
@@ -38,6 +38,9 @@ Haven't built electron libraries for each platform yet. You'll have to use the D
 - [ ] preview dashboard before deploying
 - [ ] share dashboard formulas
 - [ ] add more connection options like proxy
+- [ ] add a cool logo
+- [ ] add to tools page
+- [ ] add gif to readme to show how easy it is
 
 ## Development
 
@@ -57,6 +60,7 @@ Libraries
 - [electron](https://electronjs.org/)
 - [electron-react-boilerplate](https://github.com/chentsulin/electron-react-boilerplate)
 - [css-modules](https://github.com/css-modules/css-modules)
+- [electron-store](https://github.com/sindresorhus/electron-store)
 - [request](https://github.com/request/request)
 - [request-promise](https://github.com/request/request-promise)
 - [bluebird](http://bluebirdjs.com/docs/api-reference.html)

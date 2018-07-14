@@ -1,20 +1,13 @@
 import rp from 'request-promise'
-import { options, baseURL } from './requestOptions'
+import getRequestOptions from './requestOptions'
 
-export default ({ dashObj }) => {
+export default ({ dashObj, config }) => {
+  const { options, baseURL } = getRequestOptions(...config)
   if (dashObj === undefined || dashObj === null) {
     console.console.error('no dashboard obj')
     return
   }
-
-  const formData = {
-    file: {
-      value: Buffer.from(JSON.stringify(dashObj)),
-      options: {
-        filename: 'name_does_not_matter.json',
-      },
-    },
-  }
+  console.log(options, baseURL)
 
   rp({
     ...options,

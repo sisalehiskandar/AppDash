@@ -40,5 +40,5 @@ export default {
   dataSeriesTemplates: null,
   text: 'Dashboard label',
   textAlign: 'CENTER',
-  margin: 4
+  margin: 4,
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import Store from 'electron-store'
 // import styles from './Home.css'
 import main from '../logic/main'
 
@@ -8,10 +9,17 @@ export default class Home extends Component {
     super()
     this.state = { query: '', dashboardName: '', msg: '' }
   }
-  onSubmit = () => {
+  onSubmit = event => {
+    event.preventDefault()
+
     const { query, dashboardName } = this.state
-    const { msg } = main({ query, dashboardName })
+    const store = new Store()
+    const config = store.store
+
+    const { msg } = main({ query, dashboardName, config })
     this.setState({ msg })
+
+    return false
   }
   setDashboardName = event => {
     this.setState({ dashboardName: event.target.value })
@@ -34,6 +42,12 @@ export default class Home extends Component {
             </p>
           </div>
           <span>{this.state.msg}</span>
+          <div>
+            <p>
+              First, add your controller details in{' '}
+              <Link to="/config">Config</Link>
+            </p>
+          </div>
 
           <form>
             <div className="form-group">
@@ -60,9 +74,9 @@ export default class Home extends Component {
               />
             </div>
             <button
-              type="submit"
+              type="button"
               className="btn btn-primary"
-              onSubmit={this.onSubmit}
+              onClick={this.onSubmit}
             >
               Deploy Dashboard
             </button>

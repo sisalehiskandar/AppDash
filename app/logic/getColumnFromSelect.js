@@ -1,7 +1,7 @@
 import {
   createLabelColumn,
   createMetricColumn,
-  createHeader
+  createHeader,
 } from './createColumn'
 import { getApplicationFromWheres } from './queryParser'
 import getMetricFromShortcut from './getMetricFromShortcut'
@@ -13,7 +13,7 @@ export default ({ selects, selectIndex, data, wheres }) => {
   const select = selects[selectIndex].value
   const header = createHeader({
     labelText: selects[selectIndex].as || getMetricFromShortcut(select).metric,
-    x: selectIndex
+    x: selectIndex,
   })
 
   if (LABEL_ENTITIES.includes(select)) {
@@ -26,7 +26,7 @@ export default ({ selects, selectIndex, data, wheres }) => {
 
     return [
       header,
-      ...createLabelColumn({ labelTexts, x: DEFAULT_WIDTH * selectIndex })
+      ...createLabelColumn({ labelTexts, x: DEFAULT_WIDTH * selectIndex }),
     ]
   }
   // create a metric column
@@ -37,7 +37,7 @@ export default ({ selects, selectIndex, data, wheres }) => {
     const metricWidgetData = data.bt.map(({ internalName, tier }) => ({
       applicationName,
       metricPath: `Business Transaction Performance|Business Transactions|${tier}|${internalName}|${metric}`,
-      entityName: tier
+      entityName: tier,
     }))
 
     return [
@@ -45,8 +45,8 @@ export default ({ selects, selectIndex, data, wheres }) => {
       ...createMetricColumn({
         metricWidgetData,
         x: DEFAULT_WIDTH * selectIndex,
-        formatString: getMetricFromShortcut(select).formatString
-      })
+        formatString: getMetricFromShortcut(select).formatString,
+      }),
     ]
   }
 }

@@ -10,7 +10,7 @@ export const createLabelColumn = ({ labelTexts, x }) => {
     height: 50,
     x,
     y: (index + 1) * labelWidget.height,
-    textAlign: 'LEFT'
+    textAlign: 'LEFT',
   }))
   return labels
 }
@@ -22,14 +22,14 @@ export const createMetricColumn = ({ metricWidgetData, x, formatString }) => {
       dataSeriesTemplates: getMetricDataSeriesTemplates({
         applicationName,
         metricPath,
-        entityName
+        entityName,
       }),
       width: 300,
       height: 50,
       x,
       y: (index + 1) * labelWidget.height,
-      label: metricWidget.label || formatString
-    })
+      label: metricWidget.label || formatString,
+    }),
   )
   return metrics
 }
@@ -42,5 +42,5 @@ export const createHeader = ({ labelText, x }) => ({
   x: x * 300,
   y: 0,
   textAlign: 'LEFT',
-  fontSize: 18
+  fontSize: 18,
 })

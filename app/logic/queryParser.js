@@ -10,7 +10,7 @@ const getSelects = ({ query }) => {
     if (asResults) {
       return {
         value: asResults[1],
-        as: asResults[2].substr(1, asResults[2].length - 2)
+        as: asResults[2].substr(1, asResults[2].length - 2),
       }
     }
     return { value: select }
