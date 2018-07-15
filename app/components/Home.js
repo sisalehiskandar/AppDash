@@ -16,10 +16,6 @@ export default class Home extends Component {
     const store = new Store()
     const config = store.store
     main({ query, dashboardName, config }).then(({ msg, type }) => {
-      console.log('here')
-      console.log(msg)
-      console.log(type)
-
       this.setState({ msg, type })
     })
   }
@@ -28,6 +24,13 @@ export default class Home extends Component {
   }
   setQuery = event => {
     this.setState({ query: event.target.value })
+  }
+  addSampleQuery = event => {
+    this.setState({
+      query:
+        'SELECT bt, art AS "Response Time", cpm, epm FROM applications WHERE application = "2075ICE.PREPROD" AND bt REGEXP "AdaptiveAuthentication"',
+    })
+    event.preventDefault()
   }
   render() {
     return (
@@ -63,8 +66,14 @@ export default class Home extends Component {
                 value={this.state.dashboardName}
               />
             </div>
+
             <div className="form-group">
               <label htmlFor="queryInput">Query</label>
+              <div className="mb-1">
+                <a href="#" onClick={this.addSampleQuery}>
+                  Add sample query
+                </a>
+              </div>
               <textarea
                 className="form-control"
                 id="queryInput"
