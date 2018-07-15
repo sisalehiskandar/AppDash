@@ -1,8 +1,7 @@
 import _ from 'lodash'
 import rp from 'request-promise'
-import { options, baseURL } from './requestOptions'
 
-export const getApps = async () =>
+export const getApps = async ({ options, baseURL }) =>
   rp({
     ...options,
     url: `${baseURL}/rest/applications?output=json`,
@@ -17,7 +16,7 @@ export const getApps = async () =>
       console.log(err)
     })
 
-export const getTiers = async ({ applicationName }) =>
+export const getTiers = async ({ applicationName, options, baseURL }) =>
   rp({
     ...options,
     url: `${baseURL}/rest/applications/${applicationName}/tiers?output=json`,
@@ -32,7 +31,7 @@ export const getTiers = async ({ applicationName }) =>
       console.log(err)
     })
 
-export const getBTs = async ({ applicationName, wheres }) =>
+export const getBTs = async ({ applicationName, wheres, options, baseURL }) =>
   rp({
     ...options,
     url: `${baseURL}/rest/applications/${applicationName}/business-transactions?output=json`,

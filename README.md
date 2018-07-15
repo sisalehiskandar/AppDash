@@ -45,7 +45,6 @@ Haven't built electron libraries for each platform yet. You'll have to use the D
 ## Development
 
 1. Checkout code from (GitHub)[https://github.com/Appdynamics/dash-ql]
-1. Add your controller details to `config.json`
 1. Download [nvm](https://github.com/creationix/nvm). Once nvm is installed, run `nvm install v8`
 1. From the project directory, install dependencies with `npm install`
 1. Run `npm run dev`

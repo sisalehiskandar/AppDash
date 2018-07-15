@@ -5,5 +5,7 @@
 @import "~font-awesome/css/font-awesome.css";
 @import "~bootstrap/dist/css/bootstrap.css";
 
-body {
+/* Heading */
+nav > a.nav-link {
+    color: white;
 }
