@@ -2,9 +2,11 @@
 
 Create AppD dashboards at lightning speed with a query language
 
-## How to Use
+## Download
 
-Haven't built electron libraries for each platform yet. You'll have to use the Development instructions
+Mac: https://github.com/Appdynamics/dash-ql/releases/download/v1.0.0-beta-1/dash-iq-1.0.0.dmg
+
+Windows: https://github.com/Appdynamics/dash-ql/releases/download/v1.0.0-beta-1/dash-iq.Setup.1.0.0.exe
 
 ## Features
 - [x] shortforms: (art = Average Response Time (ms), etc.)
