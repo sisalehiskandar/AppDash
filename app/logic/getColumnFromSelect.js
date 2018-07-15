@@ -31,7 +31,7 @@ export default ({ selects, selectIndex, data, wheres }) => {
   }
   // create a metric column
 
-  const applicationName = getApplicationFromWheres({ wheres })
+  const { applicationName } = getApplicationFromWheres({ wheres })
   const { metric } = getMetricFromShortcut(select)
   if (selects[0].value === 'bt') {
     const metricWidgetData = data.bt.map(({ internalName, tier }) => ({

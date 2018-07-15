@@ -2,12 +2,11 @@ import rp from 'request-promise'
 
 export default ({ dashObj, options, baseURL }) => {
   if (dashObj === undefined || dashObj === null) {
-    console.console.error('no dashboard obj')
-    return
+    console.error('no dashboard obj')
+    return { msg: `Error: no dashboard obj`, type: 'danger' }
   }
-  console.log(options, baseURL)
 
-  rp({
+  return rp({
     ...options,
     url: `${baseURL}/CustomDashboardImportExportServlet`,
     method: 'POST',
@@ -28,34 +27,10 @@ export default ({ dashObj, options, baseURL }) => {
     .promise()
     .then(data => {
       console.log(data)
+      return { msg: 'Created dashboard successfully!', type: 'success' }
     })
     .catch(err => {
-      console.log(err)
+      console.error(err)
+      return { msg: `Error: ${err}`, type: 'danger' }
     })
 }
-
-// const formData = {
-//   file: {
-//     value: Buffer.from(JSON.stringify(dashObj)),
-//     options: {
-//       filename: 'name_does_not_matter.json',
-//     },
-//   },
-// }
-
-// rp({
-//   ...options,
-//   url: `${baseURL}/CustomDashboardImportExportServlet`,
-//   method: 'POST',
-//   headers: {
-//     'Content-type': 'multipart/form-data',
-//   },
-//   formData,
-// })
-//   .promise()
-//   .then(data => {
-//     console.log(data)
-//   })
-//   .catch(err => {
-//     console.log(err)
-//   })

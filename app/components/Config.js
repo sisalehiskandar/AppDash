@@ -5,7 +5,6 @@ import Store from 'electron-store'
 export default class Config extends Component {
   constructor() {
     super()
-    // TODO: load from store
     const store = new Store()
     const host = store.get('host')
     const username = store.get('username')
@@ -13,7 +12,6 @@ export default class Config extends Component {
     const account = store.get('account')
     const port = store.get('port')
     const https = store.get('https')
-    console.log(store.store)
 
     this.state = { host, username, password, account, port, https }
   }
@@ -22,11 +20,7 @@ export default class Config extends Component {
     const { target } = event
     const value = target.type === 'checkbox' ? target.checked : target.value
     const { name } = target
-    console.log(name)
 
-    console.log(value)
-
-    // TODO: store
     const store = new Store()
     store.set({ [name]: value })
     this.setState({ [name]: value })

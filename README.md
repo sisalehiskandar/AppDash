@@ -66,38 +66,17 @@ Libraries
 - [bluebird](http://bluebirdjs.com/docs/api-reference.html)
 - [css-modules](https://github.com/css-modules/css-modules)
 
-
 ### Packaging
 
-To package apps for the local platform:
-
-```bash
-$ npm run package
-```
-
-To package apps for all platforms:
-
-First, refer to [Multi Platform Build](https://www.electron.build/multi-platform-build) for dependencies.
-
-Then,
 ```bash
 $ npm run package-all
 ```
 
-To package apps with options:
+## Contributing
 
-```bash
-$ npm run package -- --[option]
-```
+Feel free to open an issue on [GitHub Issues](https://github.com/appdynamics/dash-ql/issues)
 
-To run End-to-End Test
+## Maintainer
 
-```bash
-$ npm run build
-$ npm run test-e2e
-```
+Created and maintained by Daniel Arrizza. You can reach me at daniel (dot) arrizza (at) appdynamics.com
 
-:bulb: You can debug your production build with devtools by simply setting the `DEBUG_PROD` env variable:
-```bash
-DEBUG_PROD=true npm run package
-```

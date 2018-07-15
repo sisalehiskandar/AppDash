@@ -44,7 +44,14 @@ export const getApplicationFromWheres = ({ wheres }) => {
       application = value
     }
   })
-  return application
+  if (application !== '') {
+    return { applicationName: application }
+  }
+  return {
+    msg:
+      'No application. Specify ...FROM application WHERE application = "YOUR_APP_NAME"',
+    type: 'warning',
+  }
 }
 
 export default ({ query }) => {

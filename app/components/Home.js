@@ -9,18 +9,19 @@ export default class Home extends Component {
     super()
     this.state = { query: '', dashboardName: '', msg: '' }
   }
-  onSubmit = event => {
+  onSubmit = async event => {
     event.preventDefault()
 
     const { query, dashboardName } = this.state
     const store = new Store()
     const config = store.store
-    console.log(config)
+    main({ query, dashboardName, config }).then(({ msg, type }) => {
+      console.log('here')
+      console.log(msg)
+      console.log(type)
 
-    const { msg } = main({ query, dashboardName, config })
-    this.setState({ msg })
-
-    return false
+      this.setState({ msg, type })
+    })
   }
   setDashboardName = event => {
     this.setState({ dashboardName: event.target.value })
@@ -42,7 +43,6 @@ export default class Home extends Component {
               <a href="https://github.com/appdynamics/dash-ql">here</a>.
             </p>
           </div>
-          <span>{this.state.msg}</span>
           <div>
             <p>
               First, add your controller details in{' '}
@@ -73,6 +73,9 @@ export default class Home extends Component {
                 value={this.state.query}
                 rows={3}
               />
+            </div>
+            <div className={`my-2 text-${this.state.type}`}>
+              {this.state.msg}
             </div>
             <button
               type="button"
