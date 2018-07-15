@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Store from 'electron-store'
 
-export default class Home extends Component {
+export default class Config extends Component {
   constructor() {
     super()
     // TODO: load from store
@@ -13,6 +13,8 @@ export default class Home extends Component {
     const account = store.get('account')
     const port = store.get('port')
     const https = store.get('https')
+    console.log(store.store)
+
     this.state = { host, username, password, account, port, https }
   }
   onSubmit = () => {}
@@ -20,6 +22,9 @@ export default class Home extends Component {
     const { target } = event
     const value = target.type === 'checkbox' ? target.checked : target.value
     const { name } = target
+    console.log(name)
+
+    console.log(value)
 
     // TODO: store
     const store = new Store()
@@ -117,6 +122,7 @@ export default class Home extends Component {
                 className="form-check-input"
                 type="checkbox"
                 onChange={this.handleInputChange}
+                checked={this.state.https}
                 value={this.state.https}
                 name="https"
                 id="httpsInput"
