@@ -15,6 +15,7 @@ export default class Home extends Component {
     const { query, dashboardName } = this.state
     const store = new Store()
     const config = store.store
+    console.log(config)
 
     const { msg } = main({ query, dashboardName, config })
     this.setState({ msg })

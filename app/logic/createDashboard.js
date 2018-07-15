@@ -1,8 +1,6 @@
 import rp from 'request-promise'
-import getRequestOptions from './requestOptions'
 
-export default ({ dashObj, config }) => {
-  const { options, baseURL } = getRequestOptions(...config)
+export default ({ dashObj, options, baseURL }) => {
   if (dashObj === undefined || dashObj === null) {
     console.console.error('no dashboard obj')
     return
