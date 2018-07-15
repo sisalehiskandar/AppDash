@@ -17,6 +17,7 @@ Haven't built electron libraries for each platform yet. You'll have to use the D
 - [x] specify dashboard name
 - [x] stylize UI
 - [x] add config to UI
+- [ ] tell user if 'create dashboard' was successful or not
 - [ ] add tier to bts
 - [ ] add a title
 - [ ] more than just bts
