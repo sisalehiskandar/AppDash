@@ -26,8 +26,10 @@ Windows: https://github.com/Appdynamics/dash-ql/releases/download/v1.0.0-beta-1/
 - [ ] more than just bts
 - [ ] WHERE on metric values (current art > x)
 - [ ] WHERE OR operator and nesting
+- [ ] WHERE IN operator
 - [ ] SORT BY
 - [ ] LIMIT
+- [ ] update an existing dashboard
 - [ ] query autocomplete
 - [ ] query validation
 - [ ] HR status lights
