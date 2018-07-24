@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Store from 'electron-store'
 // import styles from './Home.css'
-import main from '../logic/main'
+import buildDashboard from '../logic/buildDashboard'
 
 export default class Home extends Component {
   constructor() {
@@ -15,7 +15,7 @@ export default class Home extends Component {
     const { query, dashboardName } = this.state
     const store = new Store()
     const config = store.store
-    main({ query, dashboardName, config }).then(({ msg, type }) => {
+    buildDashboard({ query, dashboardName, config }).then(({ msg, type }) => {
       this.setState({ msg, type })
     })
   }
