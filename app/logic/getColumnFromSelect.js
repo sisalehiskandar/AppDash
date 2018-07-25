@@ -3,13 +3,13 @@ import {
   createMetricColumn,
   createHeader,
 } from './createColumn'
-import { getApplicationFromWheres } from './queryParser'
 import getMetricFromShortcut from './getMetricFromShortcut'
+import flattenBTs from './flattenBTs'
 
 const DEFAULT_WIDTH = 300
 const LABEL_ENTITIES = ['bt', 'tier', 'backend']
 
-export default ({ selects, selectIndex, data, wheres }) => {
+export default ({ selects, selectIndex, data }) => {
   const select = selects[selectIndex].value
   const header = createHeader({
     labelText: selects[selectIndex].as || getMetricFromShortcut(select).metric,
@@ -21,7 +21,8 @@ export default ({ selects, selectIndex, data, wheres }) => {
 
     let labelTexts = []
     if (select === 'bt') {
-      labelTexts = data.bt.map(({ name }) => name)
+      const bts = flattenBTs(data.bt)
+      labelTexts = bts.map(({ bt: { name } }) => name)
     }
 
     return [
@@ -29,16 +30,18 @@ export default ({ selects, selectIndex, data, wheres }) => {
       ...createLabelColumn({ labelTexts, x: DEFAULT_WIDTH * selectIndex }),
     ]
   }
-  // create a metric column
 
-  const { applicationName } = getApplicationFromWheres({ wheres })
+  // create a metric column
   const { metric } = getMetricFromShortcut(select)
   if (selects[0].value === 'bt') {
-    const metricWidgetData = data.bt.map(({ internalName, tier }) => ({
-      applicationName,
-      metricPath: `Business Transaction Performance|Business Transactions|${tier}|${internalName}|${metric}`,
-      entityName: tier,
-    }))
+    const bts = flattenBTs(data.bt)
+    const metricWidgetData = bts.map(
+      ({ applicationName, bt: { internalName, tier } }) => ({
+        applicationName,
+        metricPath: `Business Transaction Performance|Business Transactions|${tier}|${internalName}|${metric}`,
+        entityName: tier,
+      }),
+    )
 
     return [
       header,

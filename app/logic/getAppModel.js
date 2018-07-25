@@ -1,6 +1,8 @@
 import _ from 'lodash'
 import rp from 'request-promise'
+import Promise from 'bluebird'
 
+// returns [{ name, id, description }]
 export const getApps = async ({ options, baseURL }) =>
   rp({
     ...options,
@@ -31,18 +33,27 @@ export const getTiers = async ({ applicationName, options, baseURL }) =>
       console.log(err)
     })
 
-export const getBTs = async ({ applicationName, wheres, options, baseURL }) =>
-  rp({
-    ...options,
-    url: `${baseURL}/rest/applications/${applicationName}/business-transactions?output=json`,
-  })
-    .promise()
-    .then(data => {
+export const getBTs = async ({
+  applicationNames,
+  wheres,
+  options,
+  baseURL,
+}) => {
+  const requestPromises = applicationNames.map(applicationName =>
+    Promise.props({
+      applicationName,
+      data: rp({
+        ...options,
+        url: `${baseURL}/rest/applications/${applicationName}/business-transactions?output=json`,
+      }).promise(),
+    }),
+  )
+  return Promise.all(requestPromises).then(results =>
+    results.map(({ applicationName, data }) => {
       const parsedData = JSON.parse(data).map(bt => ({
         ...bt,
         tier: bt.tierName,
       }))
-
       let filteredData = parsedData
       const filters = _.intersection(wheres.map(({ field }) => field), [
         'bt',
@@ -55,7 +66,7 @@ export const getBTs = async ({ applicationName, wheres, options, baseURL }) =>
         )
         const contextField = field === 'bt' ? 'name' : field
         filteredData = filteredData.filter(bt => {
-          if (operator === '=') {
+          if (operator === 'EQUALS') {
             return bt[contextField] === value
           } else if (operator === 'REGEXP') {
             return new RegExp(value, 'i').test(bt[contextField])
@@ -63,8 +74,7 @@ export const getBTs = async ({ applicationName, wheres, options, baseURL }) =>
           return true
         })
       })
-      return filteredData
-    })
-    .catch(err => {
-      console.log(err)
-    })
+      return { applicationName, bts: filteredData }
+    }),
+  )
+}

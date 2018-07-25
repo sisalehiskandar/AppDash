@@ -20,7 +20,7 @@ Windows: https://github.com/Appdynamics/dash-ql/releases/download/v1.0.0-beta-1/
 - [x] stylize UI
 - [x] add config to UI
 - [x] tell user if 'create dashboard' was successful or not
-- [ ] support more than one application
+- [x] support more than one application
 - [ ] calculate height of dashboard based upon row heights
 - [ ] make default alignment better
 - [ ] tell user if query can't be parsed
@@ -54,11 +54,15 @@ Windows: https://github.com/Appdynamics/dash-ql/releases/download/v1.0.0-beta-1/
 ## Development
 
 1. Checkout code from (GitHub)[https://github.com/Appdynamics/dash-ql]
-1. Download [nvm](https://github.com/creationix/nvm). Once nvm is installed, run `nvm install v8`
+1. Install NodeJS by downloading [nvm](https://github.com/creationix/nvm). Once nvm is installed, run `nvm install v8`
 1. From the project directory, install dependencies with `npm install`
 1. Run `npm run dev`
 
-### Helpful Links
+### Code Editor
+
+I suggest using the code editor Visual Studio Code, along with the extensions 'ESLint' and 'Prettier - Code formatter'. 
+
+### Dev Links
 
 API
 - [Application Model API](https://docs.appdynamics.com/display/PRO44/Application+Model+API)

@@ -32,20 +32,38 @@ const getWhere = ({ query }) => {
   const tokenizedWheres = wheres.map(where => {
     const delimeterRegex = /(.*?) ?(=|REGEXP) ?"(.*)"$/
     const [, field, operator, value] = delimeterRegex.exec(where)
-    return { field, operator, value }
+    return { field, operator: getOperator({ operator }), value }
   })
   return tokenizedWheres
 }
 
-export const getApplicationFromWheres = ({ wheres }) => {
-  let application = ''
-  wheres.forEach(({ field, value }) => {
+export const getOperator = ({ operator }) => {
+  if (operator === '=') {
+    return 'EQUALS'
+  } else if (operator.toLowerCase() === 'regexp') {
+    return 'REGEXP'
+  }
+}
+
+export const getApplicationsFromWheres = ({ wheres, allApplications }) => {
+  let applicationNames = []
+  wheres.forEach(({ field, operator, value }) => {
     if (field === 'application' || field === 'app') {
-      application = value
+      if (operator === 'EQUALS') {
+        applicationNames[0] = value
+      } else if (operator === 'REGEXP') {
+        const regex = new RegExp(value)
+        applicationNames = allApplications
+          .map(({ name }) => name)
+          .filter(name => {
+            const match = regex.exec(name)
+            return !!match
+          })
+      }
     }
   })
-  if (application !== '') {
-    return { applicationName: application }
+  if (applicationNames.length > 0) {
+    return { applicationNames }
   }
   return {
     msg:

@@ -1,6 +1,6 @@
 import _ from 'lodash'
-import queryParser, { getApplicationFromWheres } from './queryParser'
-import { getBTs } from './getAppModel'
+import queryParser, { getApplicationsFromWheres } from './queryParser'
+import { getApps, getBTs } from './getAppModel'
 import getColumnFromSelect from './getColumnFromSelect'
 import base from './widgetTemplates/base'
 import createDashboard from './createDashboard'
@@ -8,8 +8,6 @@ import createDashboard from './createDashboard'
 export default async ({ query, dashboardName = 'dash-ql', config }) => {
   if (query === '') {
     return { msg: 'No query', type: 'warning' }
-  } else if (query === 'test') {
-    query = `SELECT bt, art AS "Response Time", cpm, epm FROM applications WHERE application = "2075ICE.PREPROD" AND bt REGEXP "AdaptiveAuthentication"`
   }
 
   const {
@@ -42,20 +40,26 @@ export default async ({ query, dashboardName = 'dash-ql', config }) => {
 
   // TODO: maybe this should be a gather data method
   // TODO: only get bt info if in select
-  const { applicationName, errorMsg } = getApplicationFromWheres({ wheres })
+  const allApplications = await getApps({ options, baseURL })
+
+  const { applicationNames, errorMsg } = getApplicationsFromWheres({
+    wheres,
+    allApplications,
+  })
 
   if (errorMsg) {
     return { msg: errorMsg, type: 'error' }
   }
-  const bt = await getBTs({ applicationName, wheres, options, baseURL })
+
+  const bt = await getBTs({ applicationNames, wheres, options, baseURL })
 
   const data = { bt }
+
   const widgets = selects.map((s, index) =>
     getColumnFromSelect({
       selects,
       selectIndex: index,
       data,
-      wheres,
     }),
   )
 
