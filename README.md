@@ -21,7 +21,7 @@ Windows: https://github.com/Appdynamics/dash-ql/releases/download/v1.0.0-beta-1/
 - [x] add config to UI
 - [x] tell user if 'create dashboard' was successful or not
 - [x] support more than one application
-- [ ] calculate height of dashboard based upon row heights
+- [x] calculate width/height of dashboard based upon widgets
 - [ ] make default alignment better
 - [ ] tell user if query can't be parsed
 - [ ] add tier to bts

@@ -4,6 +4,7 @@ import { getApps, getBTs } from './getAppModel'
 import getColumnFromSelect from './getColumnFromSelect'
 import base from './widgetTemplates/base'
 import createDashboard from './createDashboard'
+import getDimensionsFromWidgets from './getDimensionsFromWidgets'
 
 export default async ({ query, dashboardName = 'dash-ql', config }) => {
   if (query === '') {
@@ -63,11 +64,14 @@ export default async ({ query, dashboardName = 'dash-ql', config }) => {
     }),
   )
 
+  const { height, width } = getDimensionsFromWidgets({ widgets })
+
   const dashObj = {
     ...base,
     widgetTemplates: _.flatten(widgets),
     name: dashboardName,
-    width: 1200,
+    width,
+    height,
   }
 
   const msg = createDashboard({ dashObj, options, baseURL })
