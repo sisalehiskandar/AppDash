@@ -59,13 +59,17 @@ export default async ({ query, dashboardName = 'AppDash', config }) => {
 
   const data = { bt }
 
-  const widgets = selects.map((s, index) =>
-    getColumnFromSelect({
+  let x = 0
+  const widgets = selects.map((s, index) => {
+    const { nextX, column } = getColumnFromSelect({
       selects,
       selectIndex: index,
       data,
-    }),
-  )
+      x,
+    })
+    x = nextX
+    return column
+  })
 
   const { height, width } = getDimensionsFromWidgets({ widgets })
 

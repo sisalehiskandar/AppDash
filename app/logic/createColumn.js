@@ -2,11 +2,11 @@ import labelWidget from './widgetTemplates/label'
 import metricWidget from './widgetTemplates/metricValue'
 import getMetricDataSeriesTemplates from './widgetTemplates/getMetricDataSeriesTemplates'
 
-export const createLabelColumn = ({ labelTexts, x }) => {
+export const createLabelColumn = ({ labelTexts, x, width }) => {
   const labels = labelTexts.map((labelText, index) => ({
     ...labelWidget,
     text: labelText,
-    width: 300,
+    width,
     height: 50,
     x,
     y: (index + 1) * labelWidget.height,
@@ -15,7 +15,12 @@ export const createLabelColumn = ({ labelTexts, x }) => {
   return labels
 }
 
-export const createMetricColumn = ({ metricWidgetData, x, formatString }) => {
+export const createMetricColumn = ({
+  metricWidgetData,
+  x,
+  formatString,
+  width,
+}) => {
   const metrics = metricWidgetData.map(
     ({ applicationName, metricPath, entityName }, index) => ({
       ...metricWidget,
@@ -24,7 +29,7 @@ export const createMetricColumn = ({ metricWidgetData, x, formatString }) => {
         metricPath,
         entityName,
       }),
-      width: 300,
+      width,
       height: 50,
       x,
       y: (index + 1) * labelWidget.height,
@@ -34,12 +39,12 @@ export const createMetricColumn = ({ metricWidgetData, x, formatString }) => {
   return metrics
 }
 
-export const createHeader = ({ labelText, x }) => ({
+export const createHeader = ({ labelText, x, width }) => ({
   ...labelWidget,
   text: labelText,
-  width: 300,
+  width,
   height: 50,
-  x: x * 300,
+  x,
   y: 0,
   textAlign: 'LEFT',
   fontSize: 18,

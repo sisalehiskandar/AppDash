@@ -21,7 +21,7 @@ You can download the latest Mac and Windows releases here: https://github.com/Ap
 - [x] support more than one application
 - [x] calculate width/height of dashboard based upon widgets
 - [x] tell user if query can't be parsed
-- [ ] make default alignment better
+- [x] make default alignment better and support different widths per column type
 - [ ] add tier to bts
 - [ ] add a title
 - [ ] more than just bts
