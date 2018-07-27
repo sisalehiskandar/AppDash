@@ -21,6 +21,7 @@
     "no-console": "off",
     "no-use-before-define": "off",
     "no-multi-assign": "off",
+    "no-else-return": "off",
     "promise/param-names": "error",
     "promise/always-return": "off",
     "promise/catch-or-return": "off",

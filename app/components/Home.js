@@ -13,10 +13,17 @@ export default class Home extends Component {
     event.preventDefault()
 
     const { query, dashboardName } = this.state
+    const dashboardNameWithDefault =
+      dashboardName === '' ? 'AppDash Dashboard' : dashboardName
+
     const store = new Store()
     const config = store.store
-    buildDashboard({ query, dashboardName, config }).then(({ msg, type }) => {
-      this.setState({ msg, type })
+    buildDashboard({
+      query,
+      dashboardName: dashboardNameWithDefault,
+      config,
+    }).then(({ msg, type }) => {
+      this.setState({ msg, type, dashboardName: dashboardNameWithDefault })
     })
   }
   setDashboardName = event => {
@@ -55,7 +62,9 @@ export default class Home extends Component {
 
           <form>
             <div className="form-group">
-              <label htmlFor="dashboardNameInput">Dashboard Name</label>
+              <label htmlFor="dashboardNameInput">
+                Dashboard Name (optional)
+              </label>
               <input
                 type="text"
                 className="form-control"

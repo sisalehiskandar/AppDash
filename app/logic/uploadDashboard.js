@@ -26,8 +26,16 @@ export default ({ dashObj, options, baseURL }) => {
   })
     .promise()
     .then(data => {
-      console.log(data)
-      return { msg: 'Created dashboard successfully!', type: 'success' }
+      const parsedData = JSON.parse(data)
+      console.log(parsedData)
+      const { success, errors } = parsedData
+      if (success) {
+        return { msg: 'Created dashboard successfully!', type: 'success' }
+      } else if (errors) {
+        return { msg: errors, type: 'danger' }
+      } else {
+        return { msg: data.toString(), type: 'danger' }
+      }
     })
     .catch(err => {
       console.error(err)
