@@ -37,13 +37,13 @@ export default class Home extends Component {
       <div>
         <div className="container" data-tid="container">
           <div className="jumbotron">
-            <h1 className="display-4">dash-ql</h1>
+            <h1 className="display-4">AppDash</h1>
             <p className="lead">Create AppD dashboards at lightning speed</p>
             <hr className="my-4" />
             <p>
-              dash-ql uses a SQL-like query language to create table dashboards.
+              AppDash uses a SQL-like query language to create table dashboards.
               Check out the GitHub{' '}
-              <a href="https://github.com/appdynamics/dash-ql">here</a>.
+              <a href="https://github.com/appdynamics/AppDash">here</a>.
             </p>
           </div>
           <div>

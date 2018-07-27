@@ -6,7 +6,7 @@ import base from './widgetTemplates/base'
 import getDimensionsFromWidgets from './getDimensionsFromWidgets'
 import uploadDashboard from './uploadDashboard'
 
-export default async ({ query, dashboardName = 'dash-ql', config }) => {
+export default async ({ query, dashboardName = 'AppDash', config }) => {
   if (query === '') {
     return { msg: 'No query', type: 'warning' }
   }
@@ -37,7 +37,10 @@ export default async ({ query, dashboardName = 'dash-ql', config }) => {
     },
   }
 
-  const { selects, wheres } = queryParser({ query })
+  const { selects, wheres, queryErrMsg } = queryParser({ query })
+  if (queryErrMsg) {
+    return { msg: queryErrMsg, type: 'danger' }
+  }
 
   // TODO: maybe this should be a gather data method
   // TODO: only get bt info if in select

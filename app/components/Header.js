@@ -7,7 +7,7 @@ export default class Header extends Component {
     return (
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
         <Link className="navbar-brand" to="/">
-          dash-ql
+          AppDash
         </Link>
 
         <Link to="/">

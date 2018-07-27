@@ -1,12 +1,12 @@
-# dash-ql
+# AppDash
 
 Create AppD dashboards at lightning speed with a query language
 
 ## Download
 
-Mac: https://github.com/Appdynamics/dash-ql/releases/download/v1.0.0-beta-1/dash-iq-1.0.0.dmg
+Mac: https://github.com/Appdynamics/AppDash/releases/download/v1.0.0-beta-1/AppDash-1.0.0.dmg
 
-Windows: https://github.com/Appdynamics/dash-ql/releases/download/v1.0.0-beta-1/dash-iq.Setup.1.0.0.exe
+Windows: https://github.com/Appdynamics/AppDash/releases/download/v1.0.0-beta-1/AppDash.Setup.1.0.0.exe
 
 ## Features
 - [x] shortforms: (art = Average Response Time (ms), etc.)
@@ -22,8 +22,8 @@ Windows: https://github.com/Appdynamics/dash-ql/releases/download/v1.0.0-beta-1/
 - [x] tell user if 'create dashboard' was successful or not
 - [x] support more than one application
 - [x] calculate width/height of dashboard based upon widgets
+- [x] tell user if query can't be parsed
 - [ ] make default alignment better
-- [ ] tell user if query can't be parsed
 - [ ] add tier to bts
 - [ ] add a title
 - [ ] more than just bts
@@ -53,7 +53,7 @@ Windows: https://github.com/Appdynamics/dash-ql/releases/download/v1.0.0-beta-1/
 
 ## Development
 
-1. Checkout code from (GitHub)[https://github.com/Appdynamics/dash-ql]
+1. Checkout code from (GitHub)[https://github.com/Appdynamics/AppDash]
 1. Install NodeJS by downloading [nvm](https://github.com/creationix/nvm). Once nvm is installed, run `nvm install v8`
 1. From the project directory, install dependencies with `npm install`
 1. Run `npm run dev`
@@ -86,7 +86,7 @@ $ npm run package-all
 
 ## Contributing
 
-Feel free to open an issue on [GitHub Issues](https://github.com/appdynamics/dash-ql/issues)
+Feel free to open an issue on [GitHub Issues](https://github.com/appdynamics/AppDash/issues)
 
 ## Maintainer
 

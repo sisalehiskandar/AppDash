@@ -7,13 +7,13 @@ export default class Home extends Component {
         <h1>About</h1>
         <div>
           <p>
-            dash-ql uses a SQL-like query language to create table dashboards.
+            AppDash uses a SQL-like query language to create table dashboards.
             Check out the GitHub{' '}
-            <a href="https://github.com/appdynamics/dash-ql">here</a>.
+            <a href="https://github.com/appdynamics/AppDash">here</a>.
           </p>
           <p>
             For feature requests or bugs, please visit{' '}
-            <a href="https://github.com/appdynamics/dash-ql/issues">
+            <a href="https://github.com/appdynamics/AppDash/issues">
               GitHub Issues
             </a>
           </p>
