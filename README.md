@@ -50,6 +50,7 @@ For Mac: Unzip the file, then drag it to your Applications folder
 - [ ] add a cool logo
 - [ ] add to tools page
 - [ ] add gif to readme to show how easy it is
+- [ ] add multiple sections to one dashboard
 
 ## Development
 
