@@ -3,8 +3,8 @@ import queryParser, { getApplicationsFromWheres } from './queryParser'
 import { getApps, getBTs } from './getAppModel'
 import getColumnFromSelect from './getColumnFromSelect'
 import base from './widgetTemplates/base'
-import createDashboard from './createDashboard'
 import getDimensionsFromWidgets from './getDimensionsFromWidgets'
+import uploadDashboard from './uploadDashboard'
 
 export default async ({ query, dashboardName = 'dash-ql', config }) => {
   if (query === '') {
@@ -74,6 +74,6 @@ export default async ({ query, dashboardName = 'dash-ql', config }) => {
     height,
   }
 
-  const msg = createDashboard({ dashObj, options, baseURL })
+  const msg = uploadDashboard({ dashObj, options, baseURL })
   return msg
 }
