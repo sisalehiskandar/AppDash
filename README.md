@@ -22,8 +22,8 @@ Windows: https://github.com/Appdynamics/dash-ql/releases/download/v1.0.0-beta-1/
 - [x] tell user if 'create dashboard' was successful or not
 - [x] support more than one application
 - [x] calculate width/height of dashboard based upon widgets
+- [x] tell user if query can't be parsed
 - [ ] make default alignment better
-- [ ] tell user if query can't be parsed
 - [ ] add tier to bts
 - [ ] add a title
 - [ ] more than just bts

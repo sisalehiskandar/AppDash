@@ -1,3 +1,6 @@
-.hello {
+/* CSS is actually in app.global.css for now */
+/* TODO: make this actually work */
+
+.form-group {
   font-size: 50px;
 }

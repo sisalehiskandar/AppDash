@@ -22,7 +22,11 @@ const getFrom = ({ query }) => {
   const fromRegex = /from(.*)where/i
   const from = fromRegex.exec(query)[1].trim()
   const isValid = fromStructure.includes(from)
-  return { from, isValid }
+  if (!isValid) {
+    throw new Error()
+  } else {
+    return from
+  }
 }
 
 const getWhere = ({ query }) => {
@@ -73,9 +77,27 @@ export const getApplicationsFromWheres = ({ wheres, allApplications }) => {
 }
 
 export default ({ query }) => {
-  const selects = getSelects({ query })
-  const { from } = getFrom({ query })
-  const wheres = getWhere({ query })
-  console.log({ selects, from, wheres })
+  let selects
+  let from
+  let wheres
+
+  try {
+    selects = getSelects({ query })
+  } catch (error) {
+    return { queryErrMsg: 'Error in SELECT' }
+  }
+
+  try {
+    from = getFrom({ query })
+  } catch (error) {
+    return { queryErrMsg: 'Error in FROM' }
+  }
+
+  try {
+    wheres = getWhere({ query })
+  } catch (error) {
+    return { queryErrMsg: `Error in WHERE` }
+  }
+
   return { selects, from, wheres }
 }
