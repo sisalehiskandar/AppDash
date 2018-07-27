@@ -4,9 +4,7 @@ Create AppD dashboards at lightning speed with a query language
 
 ## Download
 
-Mac: https://github.com/Appdynamics/AppDash/releases/download/v1.0.0-beta-1/AppDash-1.0.0.dmg
-
-Windows: https://github.com/Appdynamics/AppDash/releases/download/v1.0.0-beta-1/AppDash.Setup.1.0.0.exe
+You can download the latest Mac and Windows releases here: https://github.com/Appdynamics/AppDash/releases/latest
 
 ## Features
 - [x] shortforms: (art = Average Response Time (ms), etc.)
