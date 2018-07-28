@@ -24,6 +24,7 @@ For Mac: Unzip the file, then drag it to your Applications folder
 - [x] calculate width/height of dashboard based upon widgets
 - [x] tell user if query can't be parsed
 - [x] make default alignment better and support different widths per column type
+- [x] dashboard with row per application
 - [ ] add tier to bts
 - [ ] add a title
 - [ ] more than just bts
@@ -41,6 +42,7 @@ For Mac: Unzip the file, then drag it to your Applications folder
 - [ ] more metric types: browser, mobile, DB, SIM, IoT
 - [ ] styling/theming
 - [ ] add logo
+- [ ] allow for custom metric paths
 - [ ] table grid lines
 - [ ] help docs
 - [ ] prebuilt dashboards

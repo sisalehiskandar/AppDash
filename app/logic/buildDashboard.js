@@ -1,6 +1,6 @@
 import _ from 'lodash'
-import queryParser, { getApplicationsFromWheres } from './queryParser'
-import { getApps, getBTs } from './getAppModel'
+import queryParser from './queryParser'
+import getData from './getData'
 import getColumnFromSelect from './getColumnFromSelect'
 import base from './widgetTemplates/base'
 import getDimensionsFromWidgets from './getDimensionsFromWidgets'
@@ -44,20 +44,16 @@ export default async ({ query, dashboardName = 'AppDash', config }) => {
 
   // TODO: maybe this should be a gather data method
   // TODO: only get bt info if in select
-  const allApplications = await getApps({ options, baseURL })
 
-  const { applicationNames, errorMsg } = getApplicationsFromWheres({
+  const { data, errorMsg } = await getData({
+    selects,
     wheres,
-    allApplications,
+    options,
+    baseURL,
   })
-
   if (errorMsg) {
     return { msg: errorMsg, type: 'error' }
   }
-
-  const bt = await getBTs({ applicationNames, wheres, options, baseURL })
-
-  const data = { bt }
 
   let x = 0
   const widgets = selects.map((s, index) => {
@@ -80,6 +76,7 @@ export default async ({ query, dashboardName = 'AppDash', config }) => {
     width,
     height,
   }
+  console.log(dashObj)
 
   const msg = uploadDashboard({ dashObj, options, baseURL })
   return msg

@@ -22,12 +22,13 @@ export const createMetricColumn = ({
   width,
 }) => {
   const metrics = metricWidgetData.map(
-    ({ applicationName, metricPath, entityName }, index) => ({
+    ({ applicationName, metricPath, entityName, entityType }, index) => ({
       ...metricWidget,
       dataSeriesTemplates: getMetricDataSeriesTemplates({
         applicationName,
         metricPath,
         entityName,
+        entityType,
       }),
       width,
       height: 50,

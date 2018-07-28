@@ -19,7 +19,7 @@ const getSelects = ({ query }) => {
 }
 
 const getFrom = ({ query }) => {
-  const fromRegex = /from(.*)where/i
+  const fromRegex = /.*from (.*?)($| where)/i
   const from = fromRegex.exec(query)[1].trim()
   const isValid = fromStructure.includes(from)
   if (!isValid) {
@@ -32,13 +32,17 @@ const getFrom = ({ query }) => {
 const getWhere = ({ query }) => {
   const whereRegex = /where(.*)/i
   const allWhere = whereRegex.exec(query)
-  const wheres = allWhere[1].split('AND').map(s => s.trim())
-  const tokenizedWheres = wheres.map(where => {
-    const delimeterRegex = /(.*?) ?(=|REGEXP) ?"(.*)"$/
-    const [, field, operator, value] = delimeterRegex.exec(where)
-    return { field, operator: getOperator({ operator }), value }
-  })
-  return tokenizedWheres
+  if (!allWhere) {
+    return []
+  } else {
+    const wheres = allWhere[1].split('AND').map(s => s.trim())
+    const tokenizedWheres = wheres.map(where => {
+      const delimeterRegex = /(.*?) ?(=|REGEXP) ?"(.*)"$/
+      const [, field, operator, value] = delimeterRegex.exec(where)
+      return { field, operator: getOperator({ operator }), value }
+    })
+    return tokenizedWheres
+  }
 }
 
 export const getOperator = ({ operator }) => {

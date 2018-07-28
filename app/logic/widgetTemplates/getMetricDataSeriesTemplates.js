@@ -1,4 +1,9 @@
-export default ({ applicationName, metricPath, entityName }) => [
+export default ({
+  applicationName,
+  metricPath,
+  entityName,
+  entityType = 'APPLICATION_COMPONENT',
+}) => [
   {
     seriesType: 'LINE',
     metricType: 'OTHER',
@@ -16,7 +21,7 @@ export default ({ applicationName, metricPath, entityName }) => [
         metricPath,
         scopeEntity: {
           applicationName,
-          entityType: 'APPLICATION_COMPONENT',
+          entityType,
           entityName,
           scopingEntityType: null,
           scopingEntityName: null,
