@@ -41,7 +41,6 @@ For Mac: Unzip the file, then drag it to your Applications folder
 - [ ] save queries
 - [ ] more metric types: browser, mobile, DB, SIM, IoT
 - [ ] styling/theming
-- [ ] add logo
 - [ ] allow for custom metric paths
 - [ ] table grid lines
 - [ ] help docs
