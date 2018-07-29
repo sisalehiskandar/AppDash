@@ -6,11 +6,30 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
 /* Home */
+.home {
+  display: grid;
+  grid-template-columns: auto 300px;
+  grid-template-areas: 'main sidebar'
+}
+.saved-queries {
+  grid-area: sidebar;
+  height: 100%;
+
+}
+.main {
+  grid-area: main;
+}
+
 .form-group > label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 /* Heading */
 nav > a.nav-link {
-    color: white;
+  color: white;
+}
+
+/* Sidebar */
+.saved-queries-title {
+  padding: 0.5rem 1.25rem;
 }

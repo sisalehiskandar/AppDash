@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Store from 'electron-store'
 // import styles from './Home.css'
+import Sidebar from './Sidebar'
 import buildDashboard from '../logic/buildDashboard'
 
 export default class Home extends Component {
@@ -39,9 +40,18 @@ export default class Home extends Component {
     })
     event.preventDefault()
   }
+  selectQuery = ({ title, query }) => {
+    this.setState({
+      dashboardName: title,
+      query,
+    })
+  }
   render() {
     return (
-      <div>
+      <div className="home">
+        <div className="saved-queries">
+          <Sidebar selectQuery={this.selectQuery} />
+        </div>
         <div className="container" data-tid="container">
           <div className="my-3">
             <h1 className="display-4">AppDash</h1>
@@ -64,7 +74,7 @@ export default class Home extends Component {
                 type="text"
                 className="form-control"
                 id="dashboardNameInput"
-                aria-describedby="emailHelp"
+                aria-describedby="dashboardNameInput"
                 placeholder="Enter dashboard name"
                 onChange={this.setDashboardName}
                 value={this.state.dashboardName}

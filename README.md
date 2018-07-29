@@ -25,6 +25,7 @@ For Mac: Unzip the file, then drag it to your Applications folder
 - [x] tell user if query can't be parsed
 - [x] make default alignment better and support different widths per column type
 - [x] dashboard with row per application
+- [x] add sample queries
 - [ ] add tier to bts
 - [ ] add a title
 - [ ] more than just bts
