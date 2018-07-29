@@ -4,8 +4,10 @@ export default class Home extends Component {
   render() {
     return (
       <div className="container mt-4">
-        <h1>About</h1>
-        <div>
+        <div className="jumbotron">
+          <h1 className="display-4">About AppDash</h1>
+          <p className="lead">Create AppD dashboards at lightning speed</p>
+          <hr className="my-4" />
           <p>
             AppDash uses a SQL-like query language to create table dashboards.
             Check out the GitHub{' '}

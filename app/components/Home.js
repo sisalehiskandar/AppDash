@@ -43,15 +43,10 @@ export default class Home extends Component {
     return (
       <div>
         <div className="container" data-tid="container">
-          <div className="jumbotron">
+          <div className="my-3">
             <h1 className="display-4">AppDash</h1>
             <p className="lead">Create AppD dashboards at lightning speed</p>
-            <hr className="my-4" />
-            <p>
-              AppDash uses a SQL-like query language to create table dashboards.
-              Check out the GitHub{' '}
-              <a href="https://github.com/appdynamics/AppDash">here</a>.
-            </p>
+            <hr className="my-2" />
           </div>
           <div>
             <p>
