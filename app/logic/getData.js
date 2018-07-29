@@ -1,9 +1,7 @@
 import { getApps, getBTs } from './getAppModel'
-import { getApplicationsFromWheres } from './queryParser'
 
 const filterApps = ({ allApplications, wheres = [] }) => {
   let applications = allApplications
-  // debugger //eslint-disable-line
   wheres.forEach(({ field, operator, value }) => {
     if (field === 'app' || field === 'application') {
       applications = applications.filter(({ name }) => {
@@ -17,7 +15,6 @@ const filterApps = ({ allApplications, wheres = [] }) => {
       })
     }
   })
-  console.log(`final length ${applications.length}`)
 
   return applications
 }
@@ -25,28 +22,23 @@ const filterApps = ({ allApplications, wheres = [] }) => {
 export default async ({ selects, wheres, options, baseURL }) => {
   let data = {}
   const firstSelect = selects[0].value
-  console.log(firstSelect)
 
   const allApplications = await getApps({ options, baseURL })
-
-  const { applicationNames, errorMsg } = getApplicationsFromWheres({
-    wheres,
-    allApplications,
-  })
-
-  if (errorMsg) {
-    return { errorMsg }
-  }
+  const fileteredApplicationNames = filterApps({ allApplications, wheres }).map(
+    ({ name }) => name,
+  )
 
   if (firstSelect === 'bt') {
-    const bt = await getBTs({ applicationNames, wheres, options, baseURL })
+    const bt = await getBTs({
+      applicationNames: fileteredApplicationNames,
+      wheres,
+      options,
+      baseURL,
+    })
     data = { bt }
   } else if (firstSelect === 'app' || firstSelect === 'application') {
     data = { applications: filterApps({ allApplications, wheres }) }
   }
-  console.log('final data')
-
-  console.log(data)
 
   return { data }
 }

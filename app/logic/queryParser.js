@@ -53,33 +53,6 @@ export const getOperator = ({ operator }) => {
   }
 }
 
-export const getApplicationsFromWheres = ({ wheres, allApplications }) => {
-  let applicationNames = []
-  wheres.forEach(({ field, operator, value }) => {
-    if (field === 'application' || field === 'app') {
-      if (operator === 'EQUALS') {
-        applicationNames[0] = value
-      } else if (operator === 'REGEXP') {
-        const regex = new RegExp(value)
-        applicationNames = allApplications
-          .map(({ name }) => name)
-          .filter(name => {
-            const match = regex.exec(name)
-            return !!match
-          })
-      }
-    }
-  })
-  if (applicationNames.length > 0) {
-    return { applicationNames }
-  }
-  return {
-    msg:
-      'No application. Specify ...FROM application WHERE application = "YOUR_APP_NAME"',
-    type: 'warning',
-  }
-}
-
 export default ({ query }) => {
   let selects
   let from
