@@ -1,5 +1,6 @@
 import labelWidget from './widgetTemplates/label'
 import metricWidget from './widgetTemplates/metricValue'
+import healthList from './widgetTemplates/healthList'
 import getMetricDataSeriesTemplates from './widgetTemplates/getMetricDataSeriesTemplates'
 
 export const createLabelColumn = ({ labelTexts, x, width }) => {
@@ -50,3 +51,40 @@ export const createHeader = ({ labelText, x, width }) => ({
   textAlign: 'LEFT',
   fontSize: 18,
 })
+
+const typesToEntityType = {
+  app: 'APPLICATION',
+  bt: 'BUSINESS_TRANSACTION',
+}
+
+// type can be app, bt,
+export const createHealthColumn = ({ healthDatas, type, x, width }) =>
+  healthDatas.map(
+    ({ applicationName, entityName, scopingEntityName, subtype }, index) => {
+      const entityType = typesToEntityType[type]
+      const scopingEntityType = type === 'bt' ? 'APPLICATION_COMPONENT' : null
+      return {
+        ...healthList,
+        width,
+        x,
+        y: (index + 1) * healthList.height,
+        entityType,
+        applicationReference: {
+          ...healthList.applicationReference,
+          applicationName,
+          entityName: applicationName,
+        },
+        entityReferences: [
+          {
+            ...healthList.entityReferences[0],
+            applicationName,
+            entityType,
+            entityName: entityName || applicationName,
+            scopingEntityType,
+            scopingEntityName,
+            subtype,
+          },
+        ],
+      }
+    },
+  )

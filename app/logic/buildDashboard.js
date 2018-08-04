@@ -42,9 +42,6 @@ export default async ({ query, dashboardName = 'AppDash', config }) => {
     return { msg: queryErrMsg, type: 'danger' }
   }
 
-  // TODO: maybe this should be a gather data method
-  // TODO: only get bt info if in select
-
   const { data, errorMsg } = await getData({
     selects,
     wheres,

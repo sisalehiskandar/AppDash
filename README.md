@@ -26,6 +26,7 @@ For Mac: Unzip the file, then drag it to your Applications folder
 - [x] make default alignment better and support different widths per column type
 - [x] dashboard with row per application
 - [x] add sample queries
+- [x] HR status lights
 - [ ] add tier to bts
 - [ ] add a title
 - [ ] more than just bts
@@ -36,8 +37,6 @@ For Mac: Unzip the file, then drag it to your Applications folder
 - [ ] LIMIT
 - [ ] update an existing dashboard
 - [ ] query autocomplete
-- [ ] query validation
-- [ ] HR status lights
 - [ ] create multiple dashboards at once
 - [ ] save queries
 - [ ] more metric types: browser, mobile, DB, SIM, IoT

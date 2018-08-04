@@ -17,30 +17,31 @@ const savedQueries = [
   {
     title: 'All BTs in an App',
     query:
-      'SELECT bt, art, cpm, epm FROM applications WHERE application = "MyApp"',
+      'SELECT bt, health, art, cpm, epm FROM applications WHERE application = "MyApp"',
   },
   {
     title: 'Some BTs in an App',
     query:
-      'SELECT bt, art, cpm, epm FROM applications WHERE application = "MyApp" AND bt REGEXP "MyBT.*"',
+      'SELECT bt, health, art, cpm, epm FROM applications WHERE application = "MyApp" AND bt REGEXP "MyBT.*"',
   },
   {
     title: 'Some BTs from different Apps',
     query:
-      'SELECT bt, art, cpm, epm FROM applications WHERE app REGEXP "MyApp1|MyApp2|MyApp3 AND bt REGEXP "Login.*"',
+      'SELECT bt, health, art, cpm, epm FROM applications WHERE app REGEXP "MyApp1|MyApp2|MyApp3 AND bt REGEXP "Login.*"',
   },
   {
     title: 'All Applications',
-    query: 'SELECT app, art, cpm, epm FROM applications',
+    query: 'SELECT app, health, art, cpm, epm FROM applications',
   },
   {
     title: 'One Application',
-    query: 'SELECT app, art, cpm, epm FROM applications WHERE app = "MyApp"',
+    query:
+      'SELECT app, health, art, cpm, epm FROM applications WHERE app = "MyApp"',
   },
   {
     title: 'Some Applications',
     query:
-      'SELECT app, art, cpm, epm FROM applications WHERE app REGEXP "MyApp1|MyApp2|MyApp3"',
+      'SELECT app, health, art, cpm, epm FROM applications WHERE app REGEXP "MyApp1|MyApp2|MyApp3"',
   },
 ]
 
@@ -51,7 +52,7 @@ export default class Sidebar extends Component {
   render() {
     return (
       <div className="my-3">
-        <h4 className="saved-queries-title">Default Queries</h4>
+        <h4 className="saved-queries-title">Sample Queries</h4>
         <div className="queries-list">
           <div>
             {savedQueries &&
