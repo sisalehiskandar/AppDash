@@ -27,6 +27,7 @@ For Mac: Unzip the file, then drag it to your Applications folder
 - [x] dashboard with row per application
 - [x] add sample queries
 - [x] HR status lights
+- [x] add a cool logo
 - [ ] add tier to bts
 - [ ] add a title
 - [ ] more than just bts
@@ -48,7 +49,6 @@ For Mac: Unzip the file, then drag it to your Applications folder
 - [ ] preview dashboard before deploying
 - [ ] share dashboard formulas
 - [ ] add more connection options like proxy
-- [ ] add a cool logo
 - [ ] add to tools page
 - [ ] add gif to readme to show how easy it is
 - [ ] add multiple sections to one dashboard
