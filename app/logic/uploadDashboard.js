@@ -28,9 +28,19 @@ export default ({ dashObj, options, baseURL }) => {
     .then(data => {
       const parsedData = JSON.parse(data)
       console.log(parsedData)
-      const { success, errors } = parsedData
+      const {
+        success,
+        errors,
+        dashboard: { id },
+      } = parsedData
+      console.log('here')
+
       if (success) {
-        return { msg: 'Created dashboard successfully!', type: 'success' }
+        return {
+          msg: 'Created dashboard successfully!',
+          type: 'success',
+          dashboardLink: `${baseURL}/#/location=CDASHBOARD_DETAIL&mode=MODE_DASHBOARD&dashboard=${id}`,
+        }
       } else if (errors) {
         return { msg: errors, type: 'danger' }
       } else {

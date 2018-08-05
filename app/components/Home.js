@@ -23,8 +23,13 @@ export default class Home extends Component {
       query,
       dashboardName: dashboardNameWithDefault,
       config,
-    }).then(({ msg, type }) => {
-      this.setState({ msg, type, dashboardName: dashboardNameWithDefault })
+    }).then(({ msg, type, dashboardLink }) => {
+      this.setState({
+        msg,
+        type,
+        dashboardName: dashboardNameWithDefault,
+        dashboardLink,
+      })
     })
   }
   setDashboardName = event => {
@@ -86,7 +91,16 @@ export default class Home extends Component {
               />
             </div>
             <div className={`my-2 text-${this.state.type}`}>
-              {this.state.msg}
+              {this.state.msg}{' '}
+              {this.state.msg && this.state.dashboardLink ? (
+                <a
+                  href={this.state.dashboardLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open Dashboard
+                </a>
+              ) : null}
             </div>
             <button
               type="button"
