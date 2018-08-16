@@ -20,6 +20,8 @@ export default async ({ query, dashboardName = 'AppDash', config }) => {
     https = true,
   } = config
 
+  const filteredAccount = account === '' ? 'customer1' : account
+
   if (!host || !username || !password) {
     return {
       msg: 'Please add your controller info to Config first',
@@ -33,7 +35,7 @@ export default async ({ query, dashboardName = 'AppDash', config }) => {
     url: `${baseURL}`,
     port,
     auth: {
-      user: `${username}@${account}`,
+      user: `${username}@${filteredAccount}`,
       pass: password,
       sendImmediately: true,
     },
