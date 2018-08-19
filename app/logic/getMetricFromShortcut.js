@@ -1,5 +1,5 @@
 const SHORTCUTS = [
-  { metric: 'Application', shortcut: 'app' },
+  { metric: 'Application', shortcut: 'application' },
   { metric: 'Tier', shortcut: 'tier' },
   { metric: 'Business Transaction', shortcut: 'bt' },
   { metric: '', shortcut: 'health' },

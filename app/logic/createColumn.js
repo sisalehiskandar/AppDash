@@ -53,7 +53,7 @@ export const createHeader = ({ labelText, x, width }) => ({
 })
 
 const typesToEntityType = {
-  app: 'APPLICATION',
+  application: 'APPLICATION',
   bt: 'BUSINESS_TRANSACTION',
 }
 

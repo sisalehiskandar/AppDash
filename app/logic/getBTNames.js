@@ -1,3 +1,5 @@
+// NOTE: this was just a test to see how using the metrics hierarchy API would work
+
 import querystring from 'querystring'
 import rp from 'request-promise'
 import { options, baseURL } from './requestOptions'

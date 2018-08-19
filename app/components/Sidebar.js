@@ -27,21 +27,21 @@ const savedQueries = [
   {
     title: 'Some BTs from different Apps',
     query:
-      'SELECT bt, health, art, cpm, epm FROM applications WHERE app REGEXP "MyApp1|MyApp2|MyApp3 AND bt REGEXP "Login.*"',
+      'SELECT bt, health, art, cpm, epm FROM applications WHERE application REGEXP "MyApp1|MyApp2|MyApp3 AND bt REGEXP "Login.*"',
   },
   {
     title: 'All Applications',
-    query: 'SELECT app, health, art, cpm, epm FROM applications',
+    query: 'SELECT application, health, art, cpm, epm FROM applications',
   },
   {
     title: 'One Application',
     query:
-      'SELECT app, health, art, cpm, epm FROM applications WHERE app = "MyApp"',
+      'SELECT application, health, art, cpm, epm FROM applications WHERE application = "MyApp"',
   },
   {
     title: 'Some Applications',
     query:
-      'SELECT app, health, art, cpm, epm FROM applications WHERE app REGEXP "MyApp1|MyApp2|MyApp3"',
+      'SELECT application, health, art, cpm, epm FROM applications WHERE application REGEXP "MyApp1|MyApp2|MyApp3"',
   },
 ]
 

@@ -1,43 +1,31 @@
-import { getApps, getBTs } from './getAppModel'
-
-const filterApps = ({ allApplications, wheres = [] }) => {
-  let applications = allApplications
-  wheres.forEach(({ field, operator, value }) => {
-    if (field === 'app' || field === 'application') {
-      applications = applications.filter(({ name }) => {
-        if (operator === 'EQUALS') {
-          return name === value
-        } else if (operator === 'REGEXP') {
-          return new RegExp(value, 'i').test(name)
-        } else {
-          return true
-        }
-      })
-    }
-  })
-
-  return applications
-}
+import { getApps } from './getAppModel'
+import filterData from './filterData'
+import getBTs from './getBTs'
 
 export default async ({ selects, wheres, options, baseURL }) => {
   let data = {}
   const firstSelect = selects[0].value
 
   const allApplications = await getApps({ options, baseURL })
-  const fileteredApplicationNames = filterApps({ allApplications, wheres }).map(
-    ({ name }) => name,
-  )
+  const filteredApplications = filterData({
+    data: allApplications,
+    wheres,
+    type: 'application',
+  })
+  data = {
+    applications: filteredApplications.map(({ name, id }) => ({
+      name,
+      id,
+    })),
+  }
 
   if (firstSelect === 'bt') {
-    const bt = await getBTs({
-      applicationNames: fileteredApplicationNames,
+    data.applications = await getBTs({
+      applications: data.applications,
       wheres,
       options,
       baseURL,
     })
-    data = { bt }
-  } else if (firstSelect === 'app' || firstSelect === 'application') {
-    data = { applications: filterApps({ allApplications, wheres }) }
   }
 
   return { data }

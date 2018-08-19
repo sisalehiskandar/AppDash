@@ -5,12 +5,12 @@ import {
   createHealthColumn,
 } from './createColumn'
 import getMetricFromShortcut from './getMetricFromShortcut'
-import flattenBTs from './flattenBTs'
+import flattenAppElements from './flattenAppElements'
 
 const LABELS_WIDTH = 300
 const METRICS_WIDTH = 200
 const HEALTH_WIDTH = 50
-const LABEL_ENTITIES = ['app', 'bt', 'tier', 'backend', 'se']
+const LABEL_ENTITIES = ['application', 'bt', 'tier', 'backend', 'se']
 
 export default ({ selects, selectIndex, data, x }) => {
   let width
@@ -28,9 +28,12 @@ export default ({ selects, selectIndex, data, x }) => {
     width = LABELS_WIDTH
     let labelTexts = []
     if (select === 'bt') {
-      const bts = flattenBTs(data.bt)
-      labelTexts = bts.map(({ bt: { name } }) => name)
-    } else if (select === 'app') {
+      const bts = flattenAppElements({
+        applications: data.applications,
+        key: 'bts',
+      })
+      labelTexts = bts.map(({ data: { name } }) => name)
+    } else if (select === 'application') {
       labelTexts = data.applications.map(({ name }) => name)
     }
     return {
@@ -47,16 +50,22 @@ export default ({ selects, selectIndex, data, x }) => {
     width = HEALTH_WIDTH
     let healthDatas = []
     if (scopingSelect === 'bt') {
-      const bts = flattenBTs(data.bt)
+      const bts = flattenAppElements({
+        applications: data.applications,
+        key: 'bts',
+      })
       healthDatas = bts.map(
-        ({ applicationName, bt: { internalName, tier, entryPointType } }) => ({
+        ({
+          applicationName,
+          data: { internalName, tier, entryPointType },
+        }) => ({
           applicationName,
           entityName: internalName,
           scopingEntityName: tier,
           subtype: entryPointType,
         }),
       )
-    } else if (scopingSelect === 'app') {
+    } else if (scopingSelect === 'application') {
       healthDatas = data.applications.map(({ name }) => ({
         applicationName: name,
         entityName: name,
@@ -77,15 +86,18 @@ export default ({ selects, selectIndex, data, x }) => {
   width = METRICS_WIDTH
   let metricWidgetData
   if (scopingSelect === 'bt') {
-    const bts = flattenBTs(data.bt)
+    const bts = flattenAppElements({
+      applications: data.applications,
+      key: 'bts',
+    })
     metricWidgetData = bts.map(
-      ({ applicationName, bt: { internalName, tier } }) => ({
+      ({ applicationName, data: { internalName, tier } }) => ({
         applicationName,
         metricPath: `Business Transaction Performance|Business Transactions|${tier}|${internalName}|${metric}`,
         entityName: tier,
       }),
     )
-  } else if (scopingSelect === 'app' || scopingSelect === 'application') {
+  } else if (scopingSelect === 'application') {
     const { applications } = data
     metricWidgetData = applications.map(({ name }) => ({
       applicationName: name,

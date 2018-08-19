@@ -52,6 +52,7 @@ export default async ({ query, dashboardName = 'AppDash', config }) => {
     options,
     baseURL,
   })
+
   if (errorMsg) {
     return { msg: errorMsg, type: 'error' }
   }
