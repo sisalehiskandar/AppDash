@@ -15,6 +15,21 @@ export const SavedQuery = ({ title, onQuerySelect }) => (
 
 const savedQueries = [
   {
+    title: 'All Applications',
+    query: 'SELECT application, health, art, cpm, epm FROM applications',
+  },
+  {
+    title: 'One Application',
+    query:
+      'SELECT application, health, art, cpm, epm FROM applications WHERE application = "MyApp"',
+  },
+  {
+    title: 'Some Applications',
+    query:
+      'SELECT application, health, art, cpm, epm FROM applications WHERE application REGEXP "MyApp1|MyApp2|MyApp3"',
+  },
+
+  {
     title: 'All BTs in an App',
     query:
       'SELECT bt, health, art, cpm, epm FROM applications WHERE application = "MyApp"',
@@ -30,18 +45,9 @@ const savedQueries = [
       'SELECT bt, health, art, cpm, epm FROM applications WHERE application REGEXP "MyApp1|MyApp2|MyApp3 AND bt REGEXP "Login.*"',
   },
   {
-    title: 'All Applications',
-    query: 'SELECT application, health, art, cpm, epm FROM applications',
-  },
-  {
-    title: 'One Application',
+    title: 'All SEs in an App',
     query:
-      'SELECT application, health, art, cpm, epm FROM applications WHERE application = "MyApp"',
-  },
-  {
-    title: 'Some Applications',
-    query:
-      'SELECT application, health, art, cpm, epm FROM applications WHERE application REGEXP "MyApp1|MyApp2|MyApp3"',
+      'SELECT se, art, cpm, epm FROM applications WHERE application = "1019NBCNWBPORTAL.PP"',
   },
 ]
 

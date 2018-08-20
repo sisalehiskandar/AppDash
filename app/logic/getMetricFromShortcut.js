@@ -2,6 +2,7 @@ const SHORTCUTS = [
   { metric: 'Application', shortcut: 'application' },
   { metric: 'Tier', shortcut: 'tier' },
   { metric: 'Business Transaction', shortcut: 'bt' },
+  { metric: 'Service Endpoint', shortcut: 'se' },
   { metric: '', shortcut: 'health' },
   {
     metric: 'Average Response Time (ms)',

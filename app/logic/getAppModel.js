@@ -1,5 +1,6 @@
 import rp from 'request-promise'
 import Promise from 'bluebird'
+import getMetricHierarchy from './getMetricHierarchy'
 
 // returns [{ name, id, description }]
 export const getApps = async ({ options, baseURL }) =>
@@ -32,24 +33,60 @@ export const getTiers = async ({ applicationName, options, baseURL }) =>
       console.log(err)
     })
 
-export const getBTs = async ({ appNames, options, baseURL }) => {
-  const requestPromises = appNames.map(appName =>
+export const getBTs = async ({ applicationNames, options, baseURL }) => {
+  const requestPromises = applicationNames.map(applicationName =>
     Promise.props({
-      appName,
+      applicationName,
       data: rp({
         ...options,
-        url: `${baseURL}/rest/applications/${appName}/business-transactions?output=json`,
+        url: `${baseURL}/rest/applications/${applicationName}/business-transactions?output=json`,
       }).promise(),
     }),
   )
   return Promise.all(requestPromises).then(results =>
-    results.map(({ appName, data }) => {
+    results.map(({ applicationName, data }) => {
       const parsedData = JSON.parse(data).map(bt => ({
         ...bt,
         tier: bt.tierName,
       }))
 
-      return { appName, bts: parsedData }
+      return { applicationName, bts: parsedData }
     }),
   )
+}
+
+export const getSEs = async ({ applicationNames, options, baseURL }) => {
+  const applicationsWithTiers = await Promise.all(
+    applicationNames.map(applicationName =>
+      Promise.props({
+        applicationName,
+        tiers: getMetricHierarchy({
+          applicationName,
+          metricPath: 'Service Endpoints',
+          options,
+          baseURL,
+        }),
+      }),
+    ),
+  )
+  const requestPromises = await Promise.all(
+    applicationsWithTiers.map(({ applicationName, tiers }) =>
+      Promise.all(
+        tiers.map(tier =>
+          Promise.props({
+            applicationName,
+            tier,
+            ses: getMetricHierarchy({
+              applicationName,
+              metricPath: `Service Endpoints|${tier}`,
+              options,
+              baseURL,
+            }),
+          }),
+        ),
+      ),
+    ),
+  )
+
+  return requestPromises
 }

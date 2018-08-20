@@ -5,7 +5,7 @@ import {
   createHealthColumn,
 } from './createColumn'
 import getMetricFromShortcut from './getMetricFromShortcut'
-import flattenAppElements from './flattenAppElements'
+import flattenAppElements, { flattenSEs } from './flattenAppElements'
 
 const LABELS_WIDTH = 300
 const METRICS_WIDTH = 200
@@ -33,6 +33,12 @@ export default ({ selects, selectIndex, data, x }) => {
         key: 'bts',
       })
       labelTexts = bts.map(({ data: { name } }) => name)
+    } else if (select === 'se') {
+      const ses = flattenSEs({
+        applications: data.applications,
+        key: 'ses',
+      })
+      labelTexts = ses.map(({ data: name }) => name)
     } else if (select === 'application') {
       labelTexts = data.applications.map(({ name }) => name)
     }
@@ -97,6 +103,16 @@ export default ({ selects, selectIndex, data, x }) => {
         entityName: tier,
       }),
     )
+  } else if (scopingSelect === 'se') {
+    const ses = flattenSEs({
+      applications: data.applications,
+      key: 'ses',
+    })
+    metricWidgetData = ses.map(({ applicationName, tier, data: seName }) => ({
+      applicationName,
+      metricPath: `Service Endpoints|${tier}|${seName}|${metric}`,
+      entityName: tier,
+    }))
   } else if (scopingSelect === 'application') {
     const { applications } = data
     metricWidgetData = applications.map(({ name }) => ({
