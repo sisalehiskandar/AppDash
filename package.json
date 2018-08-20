@@ -1,7 +1,7 @@
 {
   "name": "appdash",
   "productName": "AppDash",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
   "scripts": {
     "build": "concurrently \"npm run build-main\" \"npm run build-renderer\"",
@@ -189,6 +189,7 @@
     "webpack-merge": "^4.1.2"
   },
   "dependencies": {
+    "@githubprimer/octicons-react": "^8.0.0",
     "bluebird": "^3.5.1",
     "bootstrap": "^4.1.2",
     "devtron": "^1.4.0",

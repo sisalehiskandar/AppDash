@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import Octicon, { Sync } from '@githubprimer/octicons-react'
+
 import { Link } from 'react-router-dom'
 import Store from 'electron-store'
 // import styles from './Home.css'
@@ -94,7 +96,6 @@ export default class Home extends Component {
               />
             </div>
             <div className={`my-2 text-${this.state.type}`}>
-              {this.state.deploying ? <span>Deploying...</span> : null}
               {this.state.msg}{' '}
               {this.state.msg && this.state.dashboardLink ? (
                 <a
@@ -111,7 +112,14 @@ export default class Home extends Component {
               className="btn btn-primary"
               onClick={this.onSubmit}
             >
-              Deploy Dashboard
+              {this.state.deploying ? (
+                <div>
+                  <Octicon icon={Sync} className="mr-1 spinny" />
+                  Deploying Dashboard
+                </div>
+              ) : (
+                <div>Deploy Dashboard</div>
+              )}
             </button>
           </form>
         </div>
