@@ -11,11 +11,21 @@ export default class Home extends Component {
           <p>
             AppDash uses a SQL-like query language to create table dashboards.
             Check out the GitHub{' '}
-            <a href="https://github.com/appdynamics/AppDash">here</a>.
+            <a
+              href="https://github.com/appdynamics/AppDash"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              here
+            </a>.
           </p>
           <p>
             For feature requests or bugs, please visit{' '}
-            <a href="https://github.com/appdynamics/AppDash/issues">
+            <a
+              href="https://github.com/appdynamics/AppDash/issues"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               GitHub Issues
             </a>
           </p>
