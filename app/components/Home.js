@@ -8,7 +8,7 @@ import buildDashboard from '../logic/buildDashboard'
 export default class Home extends Component {
   constructor() {
     super()
-    this.state = { query: '', dashboardName: '', msg: '' }
+    this.state = { query: '', dashboardName: '', msg: '', deploying: false }
   }
   onSubmit = async event => {
     event.preventDefault()
@@ -19,6 +19,7 @@ export default class Home extends Component {
 
     const store = new Store()
     const config = store.store
+
     buildDashboard({
       query,
       dashboardName: dashboardNameWithDefault,
@@ -29,8 +30,11 @@ export default class Home extends Component {
         type,
         dashboardName: dashboardNameWithDefault,
         dashboardLink,
+        deploying: false,
       })
     })
+
+    this.setState({ deploying: true })
   }
   setDashboardName = event => {
     this.setState({ dashboardName: event.target.value })
@@ -78,7 +82,6 @@ export default class Home extends Component {
                 value={this.state.dashboardName}
               />
             </div>
-
             <div className="form-group">
               <label htmlFor="queryInput">Query</label>
               <textarea
@@ -91,6 +94,7 @@ export default class Home extends Component {
               />
             </div>
             <div className={`my-2 text-${this.state.type}`}>
+              {this.state.deploying ? <span>Deploying...</span> : null}
               {this.state.msg}{' '}
               {this.state.msg && this.state.dashboardLink ? (
                 <a
