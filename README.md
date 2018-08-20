@@ -27,7 +27,7 @@ For Mac: Unzip the file, then drag it to your Applications folder
 - [x] dashboard with row per application
 - [x] add sample queries
 - [x] HR status lights
-- [x] add a cool logo
+- [x] add a logo for AppDash
 - [ ] add tier to bts
 - [ ] add a title
 - [ ] more than just bts
