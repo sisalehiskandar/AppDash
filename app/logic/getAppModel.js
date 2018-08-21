@@ -18,21 +18,6 @@ export const getApps = async ({ options, baseURL }) =>
       console.log(err)
     })
 
-export const getTiers = async ({ applicationName, options, baseURL }) =>
-  rp({
-    ...options,
-    url: `${baseURL}/rest/applications/${applicationName}/tiers?output=json`,
-  })
-    .promise()
-    .then(data => {
-      const parsedData = JSON.parse(data)
-      console.log(parsedData)
-      return parsedData
-    })
-    .catch(err => {
-      console.log(err)
-    })
-
 export const getBTs = async ({ applicationNames, options, baseURL }) => {
   const requestPromises = applicationNames.map(applicationName =>
     Promise.props({
@@ -51,6 +36,28 @@ export const getBTs = async ({ applicationNames, options, baseURL }) => {
       }))
 
       return { applicationName, bts: parsedData }
+    }),
+  )
+}
+
+export const getTiers = async ({ applicationNames, options, baseURL }) => {
+  const requestPromises = applicationNames.map(applicationName =>
+    Promise.props({
+      applicationName,
+      data: rp({
+        ...options,
+        url: `${baseURL}/rest/applications/${applicationName}/tiers?output=json`,
+      }).promise(),
+    }),
+  )
+  return Promise.all(requestPromises).then(results =>
+    results.map(({ applicationName, data }) => {
+      const parsedData = JSON.parse(data).map(bt => ({
+        ...bt,
+        tier: bt.tierName,
+      }))
+
+      return { applicationName, tiers: parsedData }
     }),
   )
 }

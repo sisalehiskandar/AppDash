@@ -33,7 +33,6 @@ export default ({ dashObj, options, baseURL }) => {
         errors,
         dashboard: { id },
       } = parsedData
-      console.log('here')
 
       if (success) {
         return {

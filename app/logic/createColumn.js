@@ -55,9 +55,9 @@ export const createHeader = ({ labelText, x, width }) => ({
 const typesToEntityType = {
   application: 'APPLICATION',
   bt: 'BUSINESS_TRANSACTION',
+  tier: 'APPLICATION_COMPONENT',
 }
 
-// type can be app, bt,
 export const createHealthColumn = ({ healthDatas, type, x, width }) =>
   healthDatas.map(
     ({ applicationName, entityName, scopingEntityName, subtype }, index) => {

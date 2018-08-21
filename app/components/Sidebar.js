@@ -45,9 +45,14 @@ const savedQueries = [
       'SELECT bt, health, art, cpm, epm FROM applications WHERE application REGEXP "MyApp1|MyApp2|MyApp3 AND bt REGEXP "Login.*"',
   },
   {
+    title: 'All Tiers in an App',
+    query:
+      'SELECT tier, health, art, cpm, epm FROM applications WHERE application = "SBIPV2_B"',
+  },
+  {
     title: 'All SEs in an App',
     query:
-      'SELECT se, art, cpm, epm FROM applications WHERE application = "1019NBCNWBPORTAL.PP"',
+      'SELECT se, art, cpm, epm FROM applications WHERE application = "MyApp"',
   },
 ]
 

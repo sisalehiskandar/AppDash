@@ -10,7 +10,7 @@ import flattenAppElements, { flattenSEs } from './flattenAppElements'
 const LABELS_WIDTH = 300
 const METRICS_WIDTH = 200
 const HEALTH_WIDTH = 50
-const LABEL_ENTITIES = ['application', 'bt', 'tier', 'backend', 'se']
+const LABEL_ENTITIES = ['application', 'bt', 'tier', 'node', 'backend', 'se']
 
 export default ({ selects, selectIndex, data, x }) => {
   let width
@@ -33,6 +33,12 @@ export default ({ selects, selectIndex, data, x }) => {
         key: 'bts',
       })
       labelTexts = bts.map(({ data: { name } }) => name)
+    } else if (select === 'tier') {
+      const tiers = flattenAppElements({
+        applications: data.applications,
+        key: 'tiers',
+      })
+      labelTexts = tiers.map(({ data: { name } }) => name)
     } else if (select === 'se') {
       const ses = flattenSEs({
         applications: data.applications,
@@ -71,6 +77,17 @@ export default ({ selects, selectIndex, data, x }) => {
           subtype: entryPointType,
         }),
       )
+    } else if (scopingSelect === 'tier') {
+      const tiers = flattenAppElements({
+        applications: data.applications,
+        key: 'tiers',
+      })
+      healthDatas = tiers.map(({ applicationName, data: { name } }) => ({
+        applicationName,
+        entityName: name,
+        scopingEntityName: null,
+        subtype: null,
+      }))
     } else if (scopingSelect === 'application') {
       healthDatas = data.applications.map(({ name }) => ({
         applicationName: name,
@@ -103,6 +120,16 @@ export default ({ selects, selectIndex, data, x }) => {
         entityName: tier,
       }),
     )
+  } else if (scopingSelect === 'tier') {
+    const tiers = flattenAppElements({
+      applications: data.applications,
+      key: 'tiers',
+    })
+    metricWidgetData = tiers.map(({ applicationName, data: { name } }) => ({
+      applicationName,
+      metricPath: `Overall Application Performance|${name}|${metric}`,
+      entityName: name,
+    }))
   } else if (scopingSelect === 'se') {
     const ses = flattenSEs({
       applications: data.applications,

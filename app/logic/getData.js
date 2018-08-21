@@ -2,6 +2,7 @@ import { getApps } from './getAppModel'
 import filterData from './filterData'
 import getBTs from './getBTs'
 import getSEs from './getSEs'
+import getTiers from './getTiers'
 
 export default async ({ selects, wheres, options, baseURL }) => {
   let data = {}
@@ -29,6 +30,13 @@ export default async ({ selects, wheres, options, baseURL }) => {
     })
   } else if (firstSelect === 'se') {
     data.applications = await getSEs({
+      applications: data.applications,
+      wheres,
+      options,
+      baseURL,
+    })
+  } else if (firstSelect === 'tier') {
+    data.applications = await getTiers({
       applications: data.applications,
       wheres,
       options,
