@@ -1,8 +1,8 @@
 import _ from 'lodash'
 import queryParser from './queryParser'
-import getData from './getData'
-import getColumnFromSelect from './getColumnFromSelect'
-import base from './widgetTemplates/base'
+import getData from './getData/getData'
+import getColumnFromSelect from './buildWidgets/getColumnFromSelect'
+import base from './buildWidgets/widgetTemplates/base'
 import getDimensionsFromWidgets from './getDimensionsFromWidgets'
 import uploadDashboard from './uploadDashboard'
 
