@@ -50,7 +50,7 @@ const savedQueries = [
   {
     title: 'All Nodes in an App',
     query:
-      'SELECT node, health, art, cpm, epm FROM applications WHERE application = "',
+      'SELECT node, health, art, cpm, epm FROM applications WHERE application = "MyApp"',
   },
   {
     title: 'All SEs in an App',
