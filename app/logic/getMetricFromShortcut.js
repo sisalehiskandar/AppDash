@@ -1,6 +1,9 @@
 const SHORTCUTS = [
   { metric: 'Application', shortcut: 'application' },
   { metric: 'Tier', shortcut: 'tier' },
+  { metric: 'Node', shortcut: 'node' },
+  { metric: 'Backend', shortcut: 'backend' },
+  { metric: 'Information Point', shortcut: 'ip' },
   { metric: 'Business Transaction', shortcut: 'bt' },
   { metric: 'Service Endpoint', shortcut: 'se' },
   { metric: '', shortcut: 'health' },

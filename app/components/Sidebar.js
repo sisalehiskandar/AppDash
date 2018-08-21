@@ -5,7 +5,6 @@ export const SavedQuery = ({ title, onQuerySelect }) => (
   <div className="card">
     <div className="card-body">
       <h5 className="card-title">{title}</h5>
-      {/* <p class="card-text">{title}</p> */}
       <a href="#" className="card-link" onClick={onQuerySelect}>
         Add
       </a>
@@ -28,7 +27,6 @@ const savedQueries = [
     query:
       'SELECT application, health, art, cpm, epm FROM applications WHERE application REGEXP "MyApp1|MyApp2|MyApp3"',
   },
-
   {
     title: 'All BTs in an App',
     query:
@@ -47,7 +45,12 @@ const savedQueries = [
   {
     title: 'All Tiers in an App',
     query:
-      'SELECT tier, health, art, cpm, epm FROM applications WHERE application = "SBIPV2_B"',
+      'SELECT tier, health, art, cpm, epm FROM applications WHERE application = "MyApp"',
+  },
+  {
+    title: 'All Nodes in an App',
+    query:
+      'SELECT node, health, art, cpm, epm FROM applications WHERE application = "',
   },
   {
     title: 'All SEs in an App',

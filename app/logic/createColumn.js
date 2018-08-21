@@ -56,13 +56,16 @@ const typesToEntityType = {
   application: 'APPLICATION',
   bt: 'BUSINESS_TRANSACTION',
   tier: 'APPLICATION_COMPONENT',
+  node: 'APPLICATION_COMPONENT_NODE',
 }
 
 export const createHealthColumn = ({ healthDatas, type, x, width }) =>
   healthDatas.map(
     ({ applicationName, entityName, scopingEntityName, subtype }, index) => {
       const entityType = typesToEntityType[type]
-      const scopingEntityType = type === 'bt' ? 'APPLICATION_COMPONENT' : null
+      const scopingEntityType = ['bt', 'node'].includes(type)
+        ? 'APPLICATION_COMPONENT'
+        : null
       return {
         ...healthList,
         width,

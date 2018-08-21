@@ -3,6 +3,7 @@ import filterData from './filterData'
 import getBTs from './getBTs'
 import getSEs from './getSEs'
 import getTiers from './getTiers'
+import getNodes from './getNodes'
 
 export default async ({ selects, wheres, options, baseURL }) => {
   let data = {}
@@ -21,6 +22,7 @@ export default async ({ selects, wheres, options, baseURL }) => {
     })),
   }
 
+  // TODO: should probably move these into here as they're pretty much all the same
   if (firstSelect === 'bt') {
     data.applications = await getBTs({
       applications: data.applications,
@@ -37,6 +39,13 @@ export default async ({ selects, wheres, options, baseURL }) => {
     })
   } else if (firstSelect === 'tier') {
     data.applications = await getTiers({
+      applications: data.applications,
+      wheres,
+      options,
+      baseURL,
+    })
+  } else if (firstSelect === 'node') {
+    data.applications = await getNodes({
       applications: data.applications,
       wheres,
       options,

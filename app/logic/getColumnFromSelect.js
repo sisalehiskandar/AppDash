@@ -12,6 +12,7 @@ const METRICS_WIDTH = 200
 const HEALTH_WIDTH = 50
 const LABEL_ENTITIES = ['application', 'bt', 'tier', 'node', 'backend', 'se']
 
+// TODO: each of the different widget types should probably be split out into their own files
 export default ({ selects, selectIndex, data, x }) => {
   let width
   const select = selects[selectIndex].value
@@ -39,6 +40,12 @@ export default ({ selects, selectIndex, data, x }) => {
         key: 'tiers',
       })
       labelTexts = tiers.map(({ data: { name } }) => name)
+    } else if (select === 'node') {
+      const elements = flattenAppElements({
+        applications: data.applications,
+        key: 'nodes',
+      })
+      labelTexts = elements.map(({ data: { name } }) => name)
     } else if (select === 'se') {
       const ses = flattenSEs({
         applications: data.applications,
@@ -88,6 +95,19 @@ export default ({ selects, selectIndex, data, x }) => {
         scopingEntityName: null,
         subtype: null,
       }))
+    } else if (scopingSelect === 'node') {
+      const elements = flattenAppElements({
+        applications: data.applications,
+        key: 'nodes',
+      })
+      healthDatas = elements.map(
+        ({ applicationName, data: { name, tier } }) => ({
+          applicationName,
+          entityName: name,
+          scopingEntityName: tier,
+          subtype: null,
+        }),
+      )
     } else if (scopingSelect === 'application') {
       healthDatas = data.applications.map(({ name }) => ({
         applicationName: name,
@@ -130,6 +150,18 @@ export default ({ selects, selectIndex, data, x }) => {
       metricPath: `Overall Application Performance|${name}|${metric}`,
       entityName: name,
     }))
+  } else if (scopingSelect === 'node') {
+    const elements = flattenAppElements({
+      applications: data.applications,
+      key: 'nodes',
+    })
+    metricWidgetData = elements.map(
+      ({ applicationName, data: { tier, name } }) => ({
+        applicationName,
+        metricPath: `Overall Application Performance|${tier}|Individual Nodes|${name}|${metric}`,
+        entityName: tier,
+      }),
+    )
   } else if (scopingSelect === 'se') {
     const ses = flattenSEs({
       applications: data.applications,

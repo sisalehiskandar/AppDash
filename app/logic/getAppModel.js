@@ -52,12 +52,31 @@ export const getTiers = async ({ applicationNames, options, baseURL }) => {
   )
   return Promise.all(requestPromises).then(results =>
     results.map(({ applicationName, data }) => {
-      const parsedData = JSON.parse(data).map(bt => ({
-        ...bt,
-        tier: bt.tierName,
-      }))
+      const parsedData = JSON.parse(data)
 
       return { applicationName, tiers: parsedData }
+    }),
+  )
+}
+
+// TODO: maybe take tiers as well so that can be more fine-grained
+export const getNodes = async ({ applicationNames, options, baseURL }) => {
+  const requestPromises = applicationNames.map(applicationName =>
+    Promise.props({
+      applicationName,
+      data: rp({
+        ...options,
+        url: `${baseURL}/rest/applications/${applicationName}/nodes?output=json`,
+      }).promise(),
+    }),
+  )
+  return Promise.all(requestPromises).then(results =>
+    results.map(({ applicationName, data }) => {
+      const parsedData = JSON.parse(data).map(node => ({
+        ...node,
+        tier: node.tierName,
+      }))
+      return { applicationName, data: parsedData }
     }),
   )
 }
