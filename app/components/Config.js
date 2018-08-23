@@ -100,7 +100,7 @@ export default class Config extends Component {
               <input
                 type="text"
                 className="form-control"
-                name="text"
+                name="port"
                 id="portInput"
                 placeholder="Port"
                 onChange={this.handleInputChange}

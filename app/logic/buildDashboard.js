@@ -31,6 +31,8 @@ export default async ({ query, dashboardName = 'AppDash', config }) => {
   const baseURL = `${https ? 'https' : 'http'}://${host}${
     port !== 80 ? `:${port}` : ''
   }/controller`
+  console.log(`baseURL - ${baseURL}`)
+
   const options = {
     url: `${baseURL}`,
     port,

@@ -26,7 +26,7 @@ export default [
   {
     title: 'Some BTs from different Apps',
     query:
-      'SELECT bt, health, art, cpm, epm FROM applications WHERE application REGEXP "MyApp1|MyApp2|MyApp3 AND bt REGEXP "Login.*"',
+      'SELECT bt, health, art, cpm, epm FROM applications WHERE application REGEXP "MyApp1|MyApp2|MyApp3" AND bt REGEXP "Login.*"',
   },
   {
     title: 'All Tiers in an App',
