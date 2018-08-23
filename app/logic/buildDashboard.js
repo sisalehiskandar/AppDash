@@ -17,7 +17,7 @@ export default async ({ query, dashboardName = 'AppDash', config }) => {
     password,
     account = 'customer1',
     port = 80,
-    https = true,
+    https = false,
   } = config
 
   const filteredAccount = account === '' ? 'customer1' : account
