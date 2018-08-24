@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Store from 'electron-store'
+import testConnection from '../logic/testConnection'
 
 export default class Config extends Component {
   constructor() {
@@ -13,7 +14,15 @@ export default class Config extends Component {
     const port = store.get('port')
     const https = store.get('https')
 
-    this.state = { host, username, password, account, port, https }
+    this.state = {
+      host,
+      username,
+      password,
+      account,
+      port,
+      https,
+      connectionTested: false,
+    }
   }
   onSubmit = () => {}
   handleInputChange = event => {
@@ -23,7 +32,21 @@ export default class Config extends Component {
 
     const store = new Store()
     store.set({ [name]: value })
-    this.setState({ [name]: value })
+    this.setState({ [name]: value, connectionTested: false })
+  }
+  onTestConnection = async event => {
+    event.preventDefault()
+
+    const store = new Store()
+    const config = store.store
+    console.log(config)
+
+    testConnection({ config }).then(({ succeeded }) => {
+      this.setState({
+        succeeded,
+        connectionTested: true,
+      })
+    })
   }
   render() {
     return (
@@ -32,10 +55,25 @@ export default class Config extends Component {
           <h1>Configuration</h1>
           <div className="my-3">
             <Link to="/">
-              <button type="button" className="btn btn-primary">
+              <button type="button" className="btn btn-default mr-2">
                 Back
               </button>
             </Link>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={this.onTestConnection}
+            >
+              Test Connection
+            </button>
+          </div>
+          <div>
+            {this.state.connectionTested && this.state.succeeded ? (
+              <span className="text-success">Connection succeeded!</span>
+            ) : null}
+            {this.state.connectionTested && !this.state.succeeded ? (
+              <span className="text-danger">Connection failed</span>
+            ) : null}
           </div>
           <form>
             <div className="form-group">
