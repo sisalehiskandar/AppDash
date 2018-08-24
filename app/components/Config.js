@@ -88,7 +88,8 @@ export default class Config extends Component {
                 value={this.state.host}
               />
               <small id="emailHelp" className="form-text text-muted">
-                Example: mycompany.saas.appdynamics.com
+                Please don't add 'http://' or 'https://'. Example:
+                mycompany.saas.appdynamics.com
               </small>
             </div>
             <div className="form-group">

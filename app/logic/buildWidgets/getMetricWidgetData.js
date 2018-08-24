@@ -1,4 +1,4 @@
-import flattenAppElements, { flattenSEs } from './flattenAppElements'
+import flattenAppElements from './flattenAppElements'
 
 export default ({ scopingSelect, data, metric }) => {
   let metricWidgetData
@@ -37,13 +37,13 @@ export default ({ scopingSelect, data, metric }) => {
       }),
     )
   } else if (scopingSelect === 'se') {
-    const ses = flattenSEs({
+    const ses = flattenAppElements({
       applications: data.applications,
       key: 'ses',
     })
-    metricWidgetData = ses.map(({ applicationName, tier, data: seName }) => ({
+    metricWidgetData = ses.map(({ applicationName, data: { tier, name } }) => ({
       applicationName,
-      metricPath: `Service Endpoints|${tier}|${seName}|${metric}`,
+      metricPath: `Service Endpoints|${tier}|${name}|${metric}`,
       entityName: tier,
     }))
   } else if (scopingSelect === 'application') {

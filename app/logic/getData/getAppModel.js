@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import rp from 'request-promise'
 import Promise from 'bluebird'
 import getMetricHierarchy from './getMetricHierarchy'
@@ -95,7 +96,7 @@ export const getSEs = async ({ applicationNames, options, baseURL }) => {
       }),
     ),
   )
-  const requestPromises = await Promise.all(
+  const receivedResults = await Promise.all(
     applicationsWithTiers.map(({ applicationName, tiers }) =>
       Promise.all(
         tiers.map(tier =>
@@ -114,5 +115,18 @@ export const getSEs = async ({ applicationNames, options, baseURL }) => {
     ),
   )
 
-  return requestPromises
+  const applications = _.groupBy(_.flatten(receivedResults), 'applicationName')
+  const result = []
+  Object.keys(applications).forEach(applicationName => {
+    const currentApplication = applications[applicationName]
+    const sesResult = []
+    currentApplication.forEach(({ tier, ses }) => {
+      sesResult.push(ses.map(name => ({ applicationName, tier, name })))
+    })
+    result.push({
+      application: { name: applicationName, ses: _.flatten(sesResult) },
+    })
+  })
+
+  return result
 }

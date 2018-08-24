@@ -43,4 +43,9 @@ export default [
     query:
       'SELECT se, art, cpm, epm FROM applications WHERE application = "MyApp"',
   },
+  {
+    title: 'Some SEs in different Apps',
+    query:
+      'SELECT se, art, cpm, epm FROM applications WHERE application REGEXP "MyApp" AND se REGEXP "Login.*"',
+  },
 ]
