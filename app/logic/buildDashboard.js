@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import getConnectionDetails from './getConnectionDetails'
 import queryParser from './queryParser'
 import getData from './getData/getData'
 import getColumnFromSelect from './buildWidgets/getColumnFromSelect'
@@ -10,38 +11,7 @@ export default async ({ query, dashboardName = 'AppDash', config }) => {
   if (query === '') {
     return { msg: 'No query', type: 'warning' }
   }
-
-  const {
-    host,
-    username,
-    password,
-    account = 'customer1',
-    port = 80,
-    https = false,
-  } = config
-
-  const filteredAccount = account === '' ? 'customer1' : account
-
-  if (!host || !username || !password) {
-    return {
-      msg: 'Please add your controller info to Config first',
-      type: 'warning',
-    }
-  }
-  const baseURL = `${https ? 'https' : 'http'}://${host}${
-    port !== 80 ? `:${port}` : ''
-  }/controller`
-  console.log(`baseURL - ${baseURL}`)
-
-  const options = {
-    url: `${baseURL}`,
-    port,
-    auth: {
-      user: `${username}@${filteredAccount}`,
-      pass: password,
-      sendImmediately: true,
-    },
-  }
+  const { options, baseURL } = getConnectionDetails({ config })
 
   const { selects, wheres, queryErrMsg } = queryParser({ query })
   if (queryErrMsg) {
