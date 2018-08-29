@@ -2,12 +2,12 @@ import flattenAppElements from './flattenAppElements'
 
 export default ({ scopingSelect, data }) => {
   let healthDatas
+  const elements = flattenAppElements({
+    applications: data.applications,
+    key: `${scopingSelect}s`,
+  })
   if (scopingSelect === 'bt') {
-    const bts = flattenAppElements({
-      applications: data.applications,
-      key: 'bts',
-    })
-    healthDatas = bts.map(
+    healthDatas = elements.map(
       ({ applicationName, data: { internalName, tier, entryPointType } }) => ({
         applicationName,
         entityName: internalName,
@@ -16,21 +16,13 @@ export default ({ scopingSelect, data }) => {
       }),
     )
   } else if (scopingSelect === 'tier') {
-    const tiers = flattenAppElements({
-      applications: data.applications,
-      key: 'tiers',
-    })
-    healthDatas = tiers.map(({ applicationName, data: { name } }) => ({
+    healthDatas = elements.map(({ applicationName, data: { name } }) => ({
       applicationName,
       entityName: name,
       scopingEntityName: null,
       subtype: null,
     }))
   } else if (scopingSelect === 'node') {
-    const elements = flattenAppElements({
-      applications: data.applications,
-      key: 'nodes',
-    })
     healthDatas = elements.map(({ applicationName, data: { name, tier } }) => ({
       applicationName,
       entityName: name,
