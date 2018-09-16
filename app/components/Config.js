@@ -92,6 +92,20 @@ export default class Config extends Component {
                 mycompany.saas.appdynamics.com
               </small>
             </div>
+            <div className="form-check mb-3">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                onChange={this.handleInputChange}
+                checked={this.state.https}
+                value={this.state.https}
+                name="https"
+                id="httpsInput"
+              />
+              <label className="form-check-label" htmlFor="httpsInput">
+                HTTPS
+              </label>
+            </div>
             <div className="form-group">
               <label htmlFor="accountInput">Account</label>
               <input
@@ -149,20 +163,6 @@ export default class Config extends Component {
                 Default is port 80. Only need to set this for on-prem
                 controllers
               </small>
-            </div>
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                onChange={this.handleInputChange}
-                checked={this.state.https}
-                value={this.state.https}
-                name="https"
-                id="httpsInput"
-              />
-              <label className="form-check-label" htmlFor="httpsInput">
-                HTTPS
-              </label>
             </div>
           </form>
         </div>
