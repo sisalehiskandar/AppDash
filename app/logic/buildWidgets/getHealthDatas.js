@@ -1,8 +1,7 @@
 import flattenAppElements from './flattenAppElements'
 
-export default ({ scopingSelect, data }) => {
+export default ({ scopingSelect, args, data }) => {
   let healthDatas
-
   if (scopingSelect === 'application') {
     healthDatas = data.applications.map(({ name }) => ({
       applicationName: name,
@@ -25,6 +24,16 @@ export default ({ scopingSelect, data }) => {
           subtype: entryPointType,
         }),
       )
+    } else if (scopingSelect === 'se' && args) {
+      healthDatas = elements.map(({ applicationName, data: { name } }) => ({
+        applicationName,
+        entityName:
+          args === 'art'
+            ? `z_Service Endpoint - Response Time - ${name}`
+            : `z_Service Endpoint - Errors - ${name}`,
+        scopingEntityName: null,
+        subtype: null,
+      }))
     } else if (scopingSelect === 'tier') {
       healthDatas = elements.map(({ applicationName, data: { name } }) => ({
         applicationName,

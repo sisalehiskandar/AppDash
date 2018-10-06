@@ -3,7 +3,12 @@ import metricWidget from './widgetTemplates/metricValue'
 import healthList from './widgetTemplates/healthList'
 import getMetricDataSeriesTemplates from './widgetTemplates/getMetricDataSeriesTemplates'
 
-export const createLabelColumn = ({ labelTexts, x, width }) => {
+export const createLabelColumn = ({
+  labelTexts,
+  textAlign = 'LEFT',
+  x,
+  width,
+}) => {
   const labels = labelTexts.map((labelText, index) => ({
     ...labelWidget,
     text: labelText,
@@ -11,7 +16,7 @@ export const createLabelColumn = ({ labelTexts, x, width }) => {
     height: 50,
     x,
     y: (index + 1) * labelWidget.height,
-    textAlign: 'LEFT',
+    textAlign,
   }))
   return labels
 }
@@ -41,14 +46,14 @@ export const createMetricColumn = ({
   return metrics
 }
 
-export const createHeader = ({ labelText, x, width }) => ({
+export const createHeader = ({ labelText, textAlign = 'LEFT', x, width }) => ({
   ...labelWidget,
   text: labelText,
   width,
   height: 50,
   x,
   y: 0,
-  textAlign: 'LEFT',
+  textAlign,
   fontSize: 18,
 })
 
@@ -59,7 +64,13 @@ const typesToEntityType = {
   node: 'APPLICATION_COMPONENT_NODE',
 }
 
-export const createHealthColumn = ({ healthDatas, type, x, width }) =>
+export const createHealthColumn = ({
+  healthDatas,
+  policy = false,
+  type,
+  x,
+  width,
+}) =>
   healthDatas.map(
     ({ applicationName, entityName, scopingEntityName, subtype }, index) => {
       const entityType = typesToEntityType[type]
@@ -71,7 +82,7 @@ export const createHealthColumn = ({ healthDatas, type, x, width }) =>
         width,
         x,
         y: (index + 1) * healthList.height,
-        entityType,
+        entityType: policy ? 'POLICY' : entityType,
         applicationReference: {
           ...healthList.applicationReference,
           applicationName,

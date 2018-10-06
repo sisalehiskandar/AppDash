@@ -44,6 +44,11 @@ export default [
       'SELECT se, art, cpm, epm FROM applications WHERE application = "MyApp"',
   },
   {
+    title: 'SEs with Health Rules',
+    query:
+      'SELECT se, health(art), health(error), art, cpm, epm FROM applications WHERE application REGEXP "MyApp"',
+  },
+  {
     title: 'Some SEs in different Apps',
     query:
       'SELECT se, art, cpm, epm FROM applications WHERE application REGEXP "MyApp" AND se REGEXP "Login.*"',

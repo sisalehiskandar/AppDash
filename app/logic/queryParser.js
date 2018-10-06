@@ -15,7 +15,15 @@ const getSelects = ({ query }) => {
     }
     return { value: select }
   })
-  return selectsWithAs
+  const selectsWithParams = selectsWithAs.map(select => {
+    const argsRegex = /health\((.*)\)/
+    const argsResults = argsRegex.exec(select.value)
+    if (argsResults) {
+      return { ...select, value: 'health', args: argsResults[1] }
+    }
+    return select
+  })
+  return selectsWithParams
 }
 
 const getFrom = ({ query }) => {
