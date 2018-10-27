@@ -8,8 +8,15 @@ import getDimensionsFromWidgets from './getDimensionsFromWidgets'
 import uploadDashboard from './uploadDashboard'
 import flattenAppElements from './buildWidgets/flattenAppElements'
 import createSEHRs from './hrs/createSEHRs'
+import createDashFromTemplate from './createDashFromTemplate'
 
-export default async ({ query, dashboardName = 'AppDash', config }) => {
+export default async ({
+  query,
+  mode,
+  template,
+  dashboardName = 'AppDash',
+  config,
+}) => {
   if (query === '') {
     return { msg: 'No query', type: 'warning' }
   }
@@ -35,50 +42,55 @@ export default async ({ query, dashboardName = 'AppDash', config }) => {
     return { msg: errorMsg, type: 'error' }
   }
 
-  // create health rules if necessary
-  const scopingSelect = selects[0].value
-  if (
-    scopingSelect === 'se' &&
-    selects.map(({ value }) => value).includes('health')
-  ) {
-    const elements = flattenAppElements({
-      applications: data.applications,
-      key: `${scopingSelect}s`,
+  let dashObj
+  if (mode === 'TEMPLATE') {
+    dashObj = createDashFromTemplate({ data, template, dashboardName, selects })
+  } else if (mode === 'GRID') {
+    // create health rules if necessary
+    const scopingSelect = selects[0].value
+    if (
+      scopingSelect === 'se' &&
+      selects.map(({ value }) => value).includes('health')
+    ) {
+      const elements = flattenAppElements({
+        applications: data.applications,
+        key: `${scopingSelect}s`,
+      })
+      const healthArgs = selects
+        .filter(({ value }) => value === 'health')
+        .map(({ args }) => args)
+
+      const hrs = await createSEHRs({ healthArgs, elements, options, baseURL })
+      console.log(hrs)
+    }
+
+    // build all the widgetsa
+    let x = 0
+    const widgets = selects.map((s, index) => {
+      const { nextX, column } = getColumnFromSelect({
+        selects,
+        selectIndex: index,
+        data,
+        x,
+      })
+      x = nextX
+      return column
     })
-    const healthArgs = selects
-      .filter(({ value }) => value === 'health')
-      .map(({ args }) => args)
 
-    const hrs = await createSEHRs({ healthArgs, elements, options, baseURL })
-    console.log(hrs)
+    // get how big the dashboard should be
+    const { height, width } = getDimensionsFromWidgets({ widgets })
+
+    dashObj = {
+      ...base,
+      widgetTemplates: _.flatten(widgets),
+      name: dashboardName,
+      width,
+      height,
+    }
   }
-
-  // build all the widgetsa
-  let x = 0
-  const widgets = selects.map((s, index) => {
-    const { nextX, column } = getColumnFromSelect({
-      selects,
-      selectIndex: index,
-      data,
-      x,
-    })
-    x = nextX
-    return column
-  })
-
-  // get how big the dashboard should be
-  const { height, width } = getDimensionsFromWidgets({ widgets })
-
-  const dashObj = {
-    ...base,
-    widgetTemplates: _.flatten(widgets),
-    name: dashboardName,
-    width,
-    height,
-  }
-  console.log(dashObj)
 
   // upload to the controller
+  console.log(dashObj)
   const msg = uploadDashboard({ dashObj, options, baseURL })
   return msg
 }

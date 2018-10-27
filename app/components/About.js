@@ -5,7 +5,7 @@ export default class Home extends Component {
     return (
       <div className="container mt-4">
         <div className="jumbotron">
-          <h1 className="display-4">About AppDash - v1.8.3</h1>
+          <h1 className="display-4">About AppDash - v1.9.1</h1>
           <p className="lead">Create AppD dashboards at lightning speed</p>
           <hr className="my-4" />
           <p>

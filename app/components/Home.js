@@ -10,12 +10,19 @@ import buildDashboard from '../logic/buildDashboard'
 export default class Home extends Component {
   constructor() {
     super()
-    this.state = { query: '', dashboardName: '', msg: '', deploying: false }
+    this.state = {
+      query: '',
+      dashboardName: '',
+      msg: '',
+      deploying: false,
+      mode: 'GRID',
+      template: '',
+    }
   }
   onSubmit = async event => {
     event.preventDefault()
 
-    const { query, dashboardName } = this.state
+    const { query, dashboardName, mode, template } = this.state
     const dashboardNameWithDefault =
       dashboardName === '' ? 'AppDash Dashboard' : dashboardName
 
@@ -24,6 +31,8 @@ export default class Home extends Component {
 
     buildDashboard({
       query,
+      template,
+      mode,
       dashboardName: dashboardNameWithDefault,
       config,
     }).then(({ msg, type, dashboardLink }) => {
@@ -44,17 +53,21 @@ export default class Home extends Component {
   setQuery = event => {
     this.setState({ query: event.target.value })
   }
-  selectQuery = ({ title, query }) => {
+  setTemplate = event => {
+    this.setState({ query: event.target.value })
+  }
+  selectQuery = ({ title, template, query }) => {
     this.setState({
       dashboardName: title,
       query,
+      template,
     })
   }
   render() {
     return (
       <div className="home">
         <div className="saved-queries">
-          <Sidebar selectQuery={this.selectQuery} />
+          <Sidebar selectQuery={this.selectQuery} mode={this.state.mode} />
         </div>
         <div className="container" data-tid="container">
           <div className="my-3">
@@ -68,6 +81,30 @@ export default class Home extends Component {
               <Link to="/config">Config</Link>
             </p>
           </div>
+          <ul className="nav nav-pills mb-2">
+            <li className="nav-item">
+              <a
+                className={`nav-link ${
+                  this.state.mode === 'GRID' ? 'active' : ''
+                }`}
+                href="#"
+                onClick={() => this.setState({ mode: 'GRID' })}
+              >
+                Grid
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                className={`nav-link ${
+                  this.state.mode === 'TEMPLATE' ? 'active' : ''
+                }`}
+                href="#"
+                onClick={() => this.setState({ mode: 'TEMPLATE' })}
+              >
+                Template Dashboards
+              </a>
+            </li>
+          </ul>
 
           <form>
             <div className="form-group">
@@ -84,6 +121,20 @@ export default class Home extends Component {
                 value={this.state.dashboardName}
               />
             </div>
+
+            {this.state.mode === 'TEMPLATE' ? (
+              <div className="form-group">
+                <label htmlFor="templateInput">Template</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="templateInput"
+                  placeholder="Select a template"
+                  onChange={this.setTemplate}
+                  value={this.state.template}
+                />
+              </div>
+            ) : null}
             <div className="form-group">
               <label htmlFor="queryInput">Query</label>
               <textarea

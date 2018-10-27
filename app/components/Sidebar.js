@@ -14,8 +14,8 @@ export const SavedQuery = ({ title, onQuerySelect }) => (
 )
 
 export default class Sidebar extends Component {
-  selectQuery = (title, query) => {
-    this.props.selectQuery({ title, query })
+  selectQuery = (title, template, query) => {
+    this.props.selectQuery({ title, template, query })
   }
   render() {
     return (
@@ -23,13 +23,21 @@ export default class Sidebar extends Component {
         <h4 className="saved-queries-title">Sample Queries</h4>
         <div className="queries-list">
           <div>
-            {defaultQueries.map(({ title, query }) => (
-              <SavedQuery
-                key={title}
-                title={title}
-                onQuerySelect={this.selectQuery.bind(null, title, query)}
-              />
-            ))}
+            {defaultQueries
+              .filter(({ type }) => type === this.props.mode)
+              .map(({ title, template, query }) => (
+                <SavedQuery
+                  key={title}
+                  title={title}
+                  template={template}
+                  onQuerySelect={this.selectQuery.bind(
+                    null,
+                    title,
+                    template,
+                    query,
+                  )}
+                />
+              ))}
           </div>
         </div>
       </div>
