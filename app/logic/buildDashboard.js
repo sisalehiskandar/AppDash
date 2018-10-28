@@ -45,12 +45,15 @@ export default async ({
 
   let dashboards
   if (mode === 'TEMPLATE') {
+    console.log(config)
+    const { savedTemplates } = config
     dashboards = createDashFromTemplate({
       data,
       template,
       stacked,
       dashboardName,
       selects,
+      savedTemplates,
     })
   } else if (mode === 'GRID') {
     // create health rules if necessary

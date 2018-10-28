@@ -2,11 +2,27 @@ import fs from 'fs'
 import path from 'path'
 import _ from 'lodash'
 
-export default ({ data, template, stacked, dashboardName, selects }) => {
-  const file = fs.readFileSync(
-    path.resolve(`./dashboardTemplates/${template}.json`),
-    'utf8',
+const getFileJSON = ({ template, savedTemplates }) => {
+  const existingTemplate = savedTemplates.find(
+    ({ title }) => title === template,
   )
+  return existingTemplate
+    ? existingTemplate.dashboardJSON
+    : fs.readFileSync(
+        path.resolve(`./dashboardTemplates/${template}.json`),
+        'utf8',
+      )
+}
+
+export default ({
+  data,
+  template,
+  stacked,
+  dashboardName,
+  savedTemplates,
+  selects,
+}) => {
+  const file = getFileJSON({ template, savedTemplates })
 
   const scopingSelect = selects[0].value
   let dataList
@@ -47,7 +63,7 @@ export default ({ data, template, stacked, dashboardName, selects }) => {
     dashboard = dataList.map(value => {
       const dashboardString = file.replace(stringRegex, value)
       const dashboardObj = JSON.parse(dashboardString)
-      return { ...dashboardObj, name: `${value} - ${dashboardObj.name}` }
+      return { ...dashboardObj, name: `${value} - ${dashboardName}` }
     })
   }
   return dashboard
