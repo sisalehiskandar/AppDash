@@ -66,8 +66,49 @@ export default [
   },
   {
     type: 'TEMPLATE',
-    template: 'OVERALL_APPLICATION',
-    title: 'Overall Application',
+    title: 'Overall Application Health',
+    query:
+      'SELECT application FROM applications WHERE application REGEXP "MyApp1|MyApp2"',
+  },
+  {
+    type: 'TEMPLATE',
+    title: 'Application - Memory',
+    query:
+      'SELECT application FROM applications WHERE application REGEXP "MyApp1|MyApp2"',
+  },
+  {
+    type: 'TEMPLATE',
+    title: 'Application - OS',
+    query:
+      'SELECT application FROM applications WHERE application REGEXP "MyApp1|MyApp2"',
+  },
+  {
+    type: 'TEMPLATE',
+    title: 'Application - Performance',
+    query:
+      'SELECT application FROM applications WHERE application REGEXP "MyApp1|MyApp2"',
+  },
+  {
+    type: 'TEMPLATE',
+    title: 'Dev - Sample 1',
+    query:
+      'SELECT application FROM applications WHERE application REGEXP "MyApp1|MyApp2"',
+  },
+  {
+    type: 'TEMPLATE',
+    title: 'Ops - Sample 2',
+    query:
+      'SELECT application FROM applications WHERE application REGEXP "MyApp1|MyApp2"',
+  },
+  {
+    type: 'TEMPLATE',
+    title: 'Ops - Sample 3',
+    query:
+      'SELECT application FROM applications WHERE application REGEXP "MyApp1|MyApp2"',
+  },
+  {
+    type: 'TEMPLATE',
+    title: 'Ops - Sample 4',
     query:
       'SELECT application FROM applications WHERE application REGEXP "MyApp1|MyApp2"',
   },

@@ -25,7 +25,7 @@ export default class Sidebar extends Component {
           <div>
             {defaultQueries
               .filter(({ type }) => type === this.props.mode)
-              .map(({ title, template, query }) => (
+              .map(({ title, template = title, query }) => (
                 <SavedQuery
                   key={title}
                   title={title}
