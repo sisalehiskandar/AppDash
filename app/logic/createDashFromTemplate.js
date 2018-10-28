@@ -36,7 +36,10 @@ export default ({ data, template, stacked, dashboardName, selects }) => {
       {
         ..._.omit(base, 'file'),
         widgetTemplates: _.flatten(widgetTemplates),
-        name: dashboardName,
+        name:
+          dataList.length === 1
+            ? `${dataList[0]} - ${dashboardName}`
+            : dashboardName,
         height: dataList.length * singleHeight,
       },
     ]
