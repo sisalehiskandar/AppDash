@@ -15,14 +15,16 @@ export default class Home extends Component {
       dashboardName: '',
       msg: '',
       deploying: false,
+      dashboardLinkList: false,
       mode: 'GRID',
       template: '',
+      stacked: true,
     }
   }
   onSubmit = async event => {
     event.preventDefault()
 
-    const { query, dashboardName, mode, template } = this.state
+    const { query, dashboardName, mode, template, stacked } = this.state
     const dashboardNameWithDefault =
       dashboardName === '' ? 'AppDash Dashboard' : dashboardName
 
@@ -31,21 +33,51 @@ export default class Home extends Component {
 
     buildDashboard({
       query,
-      template,
       mode,
+      template,
+      stacked,
       dashboardName: dashboardNameWithDefault,
       config,
-    }).then(({ msg, type, dashboardLink }) => {
-      this.setState({
-        msg,
-        type,
-        dashboardName: dashboardNameWithDefault,
-        dashboardLink,
-        deploying: false,
+    }).then(buildResults => {
+      Promise.all(buildResults).then(results => {
+        console.log(results)
+        if (results.length === 1) {
+          const { msg, type, dashboardLink } = results[0]
+          this.setState({
+            msg,
+            type,
+            dashboardName: dashboardNameWithDefault,
+            dashboardLink,
+            dashboardLinkList: false,
+            deploying: false,
+          })
+        } else {
+          const hasError = results.map(({ type }) => type).includes('danger')
+          this.setState({
+            msg: hasError
+              ? results.map(({ msg }) => msg).join()
+              : `Created ${results.length} dashboards successfully!`,
+            type: results.map(({ type }) => type).includes('danger')
+              ? 'danger'
+              : 'success',
+            dashboardLink: results[0].dashboardListLink,
+            dashboardLinkList: true,
+            deploying: false,
+          })
+        }
       })
     })
 
     this.setState({ deploying: true })
+  }
+  handleStackedChange = event => {
+    const {
+      target: { name },
+    } = event
+
+    this.setState({
+      stacked: name === 'stacked',
+    })
   }
   setDashboardName = event => {
     this.setState({ dashboardName: event.target.value })
@@ -123,17 +155,51 @@ export default class Home extends Component {
             </div>
 
             {this.state.mode === 'TEMPLATE' ? (
-              <div className="form-group">
-                <label htmlFor="templateInput">Template</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="templateInput"
-                  placeholder="Select a template"
-                  onChange={this.setTemplate}
-                  value={this.state.template}
-                />
-              </div>
+              <React.Fragment>
+                <div className="form-group">
+                  <label htmlFor="templateInput">Template</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="templateInput"
+                    placeholder="Select a template"
+                    onChange={this.setTemplate}
+                    value={this.state.template}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="stackedInput">How many dashboards?</label>
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="stacked"
+                      id="stackedInput"
+                      onChange={this.handleStackedChange}
+                      checked={this.state.stacked}
+                    />
+                    <label className="form-check-label" htmlFor="stackedInput">
+                      Create one stacked dashboard
+                    </label>
+                  </div>
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="multiple"
+                      id="stackedFalseInput"
+                      onChange={this.handleStackedChange}
+                      checked={!this.state.stacked}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="stackedFalseInput"
+                    >
+                      Create multiple dashboards
+                    </label>
+                  </div>
+                </div>
+              </React.Fragment>
             ) : null}
             <div className="form-group">
               <label htmlFor="queryInput">Query</label>
@@ -154,7 +220,9 @@ export default class Home extends Component {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Open Dashboard
+                  {this.state.dashboardLinkList
+                    ? 'Open Dashboards List'
+                    : 'Open Dashboard'}
                 </a>
               ) : null}
             </div>

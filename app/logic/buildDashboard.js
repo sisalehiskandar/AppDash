@@ -14,6 +14,7 @@ export default async ({
   query,
   mode,
   template,
+  stacked,
   dashboardName = 'AppDash',
   config,
 }) => {
@@ -42,9 +43,15 @@ export default async ({
     return { msg: errorMsg, type: 'error' }
   }
 
-  let dashObj
+  let dashboards
   if (mode === 'TEMPLATE') {
-    dashObj = createDashFromTemplate({ data, template, dashboardName, selects })
+    dashboards = createDashFromTemplate({
+      data,
+      template,
+      stacked,
+      dashboardName,
+      selects,
+    })
   } else if (mode === 'GRID') {
     // create health rules if necessary
     const scopingSelect = selects[0].value
@@ -80,17 +87,20 @@ export default async ({
     // get how big the dashboard should be
     const { height, width } = getDimensionsFromWidgets({ widgets })
 
-    dashObj = {
-      ...base,
-      widgetTemplates: _.flatten(widgets),
-      name: dashboardName,
-      width,
-      height,
-    }
+    dashboards = [
+      {
+        ...base,
+        widgetTemplates: _.flatten(widgets),
+        name: dashboardName,
+        width,
+        height,
+      },
+    ]
   }
 
   // upload to the controller
-  console.log(dashObj)
-  const msg = uploadDashboard({ dashObj, options, baseURL })
+  console.log(dashboards)
+  const msg = uploadDashboard({ dashboards, options, baseURL })
+
   return msg
 }
