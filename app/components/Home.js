@@ -70,6 +70,11 @@ export default class Home extends Component {
 
     this.setState({ deploying: true })
   }
+  handleInputChange = ({ target: { name, value } }) => {
+    this.setState({
+      [name]: value,
+    })
+  }
   handleStackedChange = event => {
     const {
       target: { name },
@@ -78,15 +83,6 @@ export default class Home extends Component {
     this.setState({
       stacked: name === 'stacked',
     })
-  }
-  setDashboardName = event => {
-    this.setState({ dashboardName: event.target.value })
-  }
-  setQuery = event => {
-    this.setState({ query: event.target.value })
-  }
-  setTemplate = event => {
-    this.setState({ query: event.target.value })
   }
   selectQuery = ({ title, template, query }) => {
     this.setState({
@@ -147,9 +143,10 @@ export default class Home extends Component {
                 type="text"
                 className="form-control"
                 id="dashboardNameInput"
+                name="dashboardName"
                 aria-describedby="dashboardNameInput"
                 placeholder="Enter dashboard name"
-                onChange={this.setDashboardName}
+                onChange={this.handleInputChange}
                 value={this.state.dashboardName}
               />
             </div>
@@ -162,8 +159,9 @@ export default class Home extends Component {
                     type="text"
                     className="form-control"
                     id="templateInput"
+                    name="template"
                     placeholder="Select a template"
-                    onChange={this.setTemplate}
+                    onChange={this.handleInputChange}
                     value={this.state.template}
                   />
                 </div>
@@ -206,8 +204,9 @@ export default class Home extends Component {
               <textarea
                 className="form-control"
                 id="queryInput"
+                name="query"
                 placeholder="Type in query here"
-                onChange={this.setQuery}
+                onChange={this.handleInputChange}
                 value={this.state.query}
                 rows={3}
               />
