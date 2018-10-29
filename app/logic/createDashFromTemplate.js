@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import _ from 'lodash'
 
-const getFileJSON = ({ template, savedTemplates }) => {
+const getFileJSON = ({ template, savedTemplates = [] }) => {
   const existingTemplate = savedTemplates.find(
     ({ title }) => title === template,
   )
