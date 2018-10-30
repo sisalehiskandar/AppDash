@@ -1,6 +1,5 @@
-import fs from 'fs'
-import path from 'path'
 import _ from 'lodash'
+import templates from './dashboardTemplates/templates'
 
 const getFileJSON = ({ template, savedTemplates = [] }) => {
   const existingTemplate = savedTemplates.find(
@@ -8,10 +7,7 @@ const getFileJSON = ({ template, savedTemplates = [] }) => {
   )
   return existingTemplate
     ? existingTemplate.dashboardJSON
-    : fs.readFileSync(
-        path.resolve(`./dashboardTemplates/${template}.json`),
-        'utf8',
-      )
+    : JSON.stringify(templates[template])
 }
 
 export default ({
