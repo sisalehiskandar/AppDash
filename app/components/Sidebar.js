@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Store from 'electron-store'
 import defaultQueries from './defaultQueries'
+import templateImages from './templateImages'
 import AddTemplateForm from './AddTemplateForm'
 
 export const SavedQuery = ({
@@ -8,10 +9,12 @@ export const SavedQuery = ({
   onQuerySelect,
   dashboardJSON,
   handleRemove,
+  img,
 }) => (
   <div className="card">
     <div className="card-body">
       <h5 className="card-title">{title}</h5>
+      <img src={img} className="w-100 mb-2" />
       <a href="#" className="card-link" onClick={onQuerySelect}>
         Add
       </a>
@@ -52,6 +55,15 @@ export default class Sidebar extends Component {
       return []
     }
   }
+  defaultQueriesWithImages = () =>
+    defaultQueries.map(defaultQuery => {
+      if (defaultQuery.type === 'TEMPLATE') {
+        const img = templateImages[defaultQuery.title]
+        return { ...defaultQuery, img }
+      } else {
+        return defaultQuery
+      }
+    })
   render() {
     return (
       <div className="my-3">
@@ -89,14 +101,15 @@ export default class Sidebar extends Component {
 
         <div className="queries-list">
           <div>
-            {[...this.getSavedTemplates(), ...defaultQueries]
+            {[...this.getSavedTemplates(), ...this.defaultQueriesWithImages()]
               .filter(({ type }) => type === this.props.mode)
-              .map(({ title, template = title, query, dashboardJSON }) => (
+              .map(({ title, template = title, query, dashboardJSON, img }) => (
                 <SavedQuery
                   key={title}
                   title={title}
                   template={template}
                   dashboardJSON={dashboardJSON}
+                  img={img}
                   onQuerySelect={this.selectQuery.bind(
                     null,
                     title,

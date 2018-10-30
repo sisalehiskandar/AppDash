@@ -8,7 +8,7 @@
 /* Home */
 .home {
   display: grid;
-  grid-template-columns: auto 300px;
+  grid-template-columns: auto 400px;
   grid-template-areas: 'main sidebar'
 }
 .saved-queries {
