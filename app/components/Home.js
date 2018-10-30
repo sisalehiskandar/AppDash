@@ -16,7 +16,7 @@ export default class Home extends Component {
       msg: '',
       deploying: false,
       dashboardLinkList: false,
-      mode: 'GRID',
+      mode: 'TEMPLATE',
       template: '',
       stacked: true,
     }
@@ -113,23 +113,23 @@ export default class Home extends Component {
             <li className="nav-item">
               <a
                 className={`nav-link ${
-                  this.state.mode === 'GRID' ? 'active' : ''
-                }`}
-                href="#"
-                onClick={() => this.setState({ mode: 'GRID' })}
-              >
-                Grid
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className={`nav-link ${
                   this.state.mode === 'TEMPLATE' ? 'active' : ''
                 }`}
                 href="#"
                 onClick={() => this.setState({ mode: 'TEMPLATE' })}
               >
                 Template Dashboards
+              </a>
+            </li>
+            <li className="nav-item">
+              <a
+                className={`nav-link ${
+                  this.state.mode === 'GRID' ? 'active' : ''
+                }`}
+                href="#"
+                onClick={() => this.setState({ mode: 'GRID' })}
+              >
+                Grid
               </a>
             </li>
           </ul>
