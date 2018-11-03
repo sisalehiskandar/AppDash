@@ -19,6 +19,14 @@ export default class Header extends Component {
         <Link className="nav-link" to="/config">
           Config
         </Link>
+        <a
+          className="nav-link"
+          href="https://github.com/Appdynamics/AppDash/blob/master/docs/help.md"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Help
+        </a>
         <Link className="nav-link" to="/about">
           About
         </Link>

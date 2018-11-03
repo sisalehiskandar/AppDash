@@ -1,51 +1,52 @@
 # AppDash
 
-Create AppD dashboards at lightning speed with a query language
+Create AppDynamics dashboards at ⚡ speed
+
+- [Features](#features)
+- [Download](#download)
+- [Contributing](docs/contributing)
+- [Maintainer](#maintainer)
+- [Help and FAQ](docs/help)
+
+## Features
+
+AppDash has two main modes: **Grid Mode** and **Template Mode**
+
+### Grid Mode
+
+With [Grid mode](docs/grid), you can quickly generate a table of widgets
+
+![](docs/img/grid-all-applications.png)
+
+### Template Mode
+
+With [Template mode](docs/template), you can use our library of existing templates or add your own.
+
+Stack dashboards together:
+
+![](docs/img/template-stacked.png)
+
+Or create multiple dashboards at once:
+
+![](docs/img/template-multiple.png)
 
 ## Download
 
-You can download the latest Mac and Windows releases here: https://github.com/Appdynamics/AppDash/releases/latest
+Download it here - https://github.com/Appdynamics/AppDash/releases/latest
 
-For Mac: Unzip the file, then drag it to your Applications folder
-
-## Development
-
-1. Checkout code from (GitHub)[https://github.com/Appdynamics/AppDash]
-1. Install NodeJS by downloading [nvm](https://github.com/creationix/nvm). Once nvm is installed, run `nvm install v8`
-1. From the project directory, install dependencies with `npm install`
-1. Run `npm run dev`
-
-### Code Editor
-
-I suggest using the code editor Visual Studio Code, along with the extensions 'ESLint' and 'Prettier - Code formatter'. 
-
-### Dev Links
-
-API
-- [Application Model API](https://docs.appdynamics.com/display/PRO44/Application+Model+API)
-- [Metric and Snapshot API](https://docs.appdynamics.com/display/PRO44/Metric+and+Snapshot+API)
-
-Libraries
-- [electron](https://electronjs.org/)
-- [electron-react-boilerplate](https://github.com/chentsulin/electron-react-boilerplate)
-- [css-modules](https://github.com/css-modules/css-modules)
-- [electron-store](https://github.com/sindresorhus/electron-store)
-- [request](https://github.com/request/request)
-- [request-promise](https://github.com/request/request-promise)
-- [bluebird](http://bluebirdjs.com/docs/api-reference.html)
-- [css-modules](https://github.com/css-modules/css-modules)
-
-### Packaging
-
-```bash
-$ npm run package-all
-```
+- **Mac:** Unzip the file, then drag it to your `Applications` folder
+- **Windows:** No installation necessary! Just double click the exe file.
+- **Linux:** Wow, you're so `1337h4x0r`. Make Richard Stallman proud and run it from the JS source - [docs](docs/contributing)
 
 ## Contributing
 
-Feel free to open an issue on [GitHub Issues](https://github.com/appdynamics/AppDash/issues)
+[Contributing](docs/contributing) - Like AppDash? Anyone is welcome to help make it better
 
 ## Maintainer
 
 Created and maintained by Daniel Arrizza. You can reach me at daniel (dot) arrizza (at) appdynamics.com
+
+## Help and FAQ
+
+[Help docs](docs/help) - A guide to each screen in the app and FAQ
 

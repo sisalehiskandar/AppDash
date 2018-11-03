@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Store from 'electron-store'
+import Octicon, { Question } from '@githubprimer/octicons-react'
 import testConnection from '../logic/testConnection'
 
 export default class Config extends Component {
@@ -53,6 +54,13 @@ export default class Config extends Component {
       <div>
         <div className="container mt-4">
           <h1>Configuration</h1>
+          <a
+            href="https://github.com/Appdynamics/AppDash/blob/master/docs/config.md"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Octicon icon={Question} className="mr-1" />Open Config help docs
+          </a>
           <div className="my-3">
             <Link to="/">
               <button type="button" className="btn btn-default mr-2">

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Octicon, { Sync } from '@githubprimer/octicons-react'
+import Octicon, { Sync, Question } from '@githubprimer/octicons-react'
 
 import { Link } from 'react-router-dom'
 import Store from 'electron-store'
@@ -133,7 +133,25 @@ export default class Home extends Component {
               </a>
             </li>
           </ul>
-
+          <div className="my-3">
+            {this.state.mode === 'GRID' ? (
+              <a
+                href="https://github.com/Appdynamics/AppDash/blob/master/docs/grid.md"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Octicon icon={Question} /> Open Grid Mode help docs
+              </a>
+            ) : (
+              <a
+                href="https://github.com/Appdynamics/AppDash/blob/master/docs/template.md"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Octicon icon={Question} /> Open Template Mode help docs
+              </a>
+            )}
+          </div>
           <form>
             <div className="form-group">
               <label htmlFor="dashboardNameInput">
