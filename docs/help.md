@@ -5,10 +5,10 @@
 
 ## Help Topics
 
-- [Config](config)
-- [Grid Mode](grid)
-- [Template Mode](template)
-
+- [Config](config.md)
+- [Grid Mode](grid.md)
+- [Template Mode](template.md)
+- [FastAppConfig](fastappconfig.md)
 
 ## FAQ
 

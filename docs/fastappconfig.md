@@ -2,7 +2,7 @@
 
 ## AppDash Advantages
 
-- [Grid mode](grid)
+- [Grid mode](grid.md)
 - Supports Service Endpoints
 - Easier to add your own templates
 - Supports creating stacked dashboards or multiple dashboards at once
