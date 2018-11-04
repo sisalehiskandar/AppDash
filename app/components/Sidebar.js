@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Store from 'electron-store'
 import defaultQueries from './defaultQueries'
-import templateImages from './templateImages'
+import templates from '../dashboardTemplates/templates'
 import AddTemplateForm from './AddTemplateForm'
 
 export const SavedQuery = ({
@@ -14,7 +14,7 @@ export const SavedQuery = ({
   <div className="card">
     <div className="card-body">
       <h5 className="card-title">{title}</h5>
-      <img src={img} className="w-100 mb-2" />
+      <img src={img} className="w-100 mb-2" alt="dashboardPreview" />
       <a href="#" className="card-link" onClick={onQuerySelect}>
         Add
       </a>
@@ -58,7 +58,7 @@ export default class Sidebar extends Component {
   defaultQueriesWithImages = () =>
     defaultQueries.map(defaultQuery => {
       if (defaultQuery.type === 'TEMPLATE') {
-        const img = templateImages[defaultQuery.title]
+        const { img } = templates[defaultQuery.title]
         return { ...defaultQuery, img }
       } else {
         return defaultQuery

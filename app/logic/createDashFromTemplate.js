@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import templates from './dashboardTemplates/templates'
+import templates from '../dashboardTemplates/templates'
 
 const getFileJSON = ({ template, savedTemplates = [] }) => {
   const existingTemplate = savedTemplates.find(
@@ -7,7 +7,7 @@ const getFileJSON = ({ template, savedTemplates = [] }) => {
   )
   return existingTemplate
     ? existingTemplate.dashboardJSON
-    : JSON.stringify(templates[template])
+    : JSON.stringify(templates[template].json)
 }
 
 export default ({
