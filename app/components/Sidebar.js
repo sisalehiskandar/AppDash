@@ -14,7 +14,10 @@ export const SavedQuery = ({
   <div className="card">
     <div className="card-body">
       <h5 className="card-title">{title}</h5>
-      <img src={img} className="w-100 mb-2" alt="dashboardPreview" />
+      {dashboardJSON ? (
+        <img src={img} className="w-100 mb-2" alt="dashboardPreview" />
+      ) : null}
+
       <a href="#" className="card-link" onClick={onQuerySelect}>
         Add
       </a>
