@@ -68,7 +68,7 @@ export default class Home extends Component {
       })
     })
 
-    this.setState({ deploying: true })
+    this.setState({ deploying: true, msg: '' })
   }
   handleInputChange = ({ target: { name, value } }) => {
     this.setState({
