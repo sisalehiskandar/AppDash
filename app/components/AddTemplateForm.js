@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Store from 'electron-store'
+import Octicon, { Question } from '@githubprimer/octicons-react'
 
 export default class AddTemplateForm extends Component {
   constructor() {
@@ -36,6 +37,15 @@ export default class AddTemplateForm extends Component {
       <div className={this.props.className}>
         <form>
           <div className="form-group">
+            <div>
+              <a
+                href="https://github.com/Appdynamics/AppDash/blob/master/docs/template.md#adding-your-own-template"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Octicon icon={Question} /> Open add your own template help docs
+              </a>
+            </div>
             <label htmlFor="dashboardNameInput">Dashboard Name</label>
             <input
               type="text"
