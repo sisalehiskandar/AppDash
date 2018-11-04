@@ -14,7 +14,7 @@ export const SavedQuery = ({
   <div className="card">
     <div className="card-body">
       <h5 className="card-title">{title}</h5>
-      {dashboardJSON ? (
+      {img ? (
         <img src={img} className="w-100 mb-2" alt="dashboardPreview" />
       ) : null}
 
@@ -106,27 +106,37 @@ export default class Sidebar extends Component {
           <div>
             {[...this.getSavedTemplates(), ...this.defaultQueriesWithImages()]
               .filter(({ type }) => type === this.props.mode)
-              .map(({ title, template = title, query, dashboardJSON, img }) => (
-                <SavedQuery
-                  key={title}
-                  title={title}
-                  template={template}
-                  dashboardJSON={dashboardJSON}
-                  img={img}
-                  onQuerySelect={this.selectQuery.bind(
-                    null,
-                    title,
-                    template,
-                    query,
-                  )}
-                  handleRemove={this.handleRemove.bind(
-                    null,
-                    title,
-                    template,
-                    query,
-                  )}
-                />
-              ))}
+              .map(
+                ({
+                  title,
+                  template = title,
+                  type,
+                  query,
+                  dashboardJSON,
+                  img,
+                }) => (
+                  <SavedQuery
+                    key={title}
+                    title={title}
+                    template={template}
+                    dashboardJSON={dashboardJSON}
+                    img={img}
+                    type={type}
+                    onQuerySelect={this.selectQuery.bind(
+                      null,
+                      title,
+                      template,
+                      query,
+                    )}
+                    handleRemove={this.handleRemove.bind(
+                      null,
+                      title,
+                      template,
+                      query,
+                    )}
+                  />
+                ),
+              )}
           </div>
         </div>
       </div>
