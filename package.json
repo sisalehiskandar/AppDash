@@ -1,7 +1,7 @@
 {
   "name": "appdash",
   "productName": "AppDash",
-  "version": "1.9.2",
+  "version": "2.0.0",
   "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
   "scripts": {
     "build": "concurrently \"npm run build-main\" \"npm run build-renderer\"",
