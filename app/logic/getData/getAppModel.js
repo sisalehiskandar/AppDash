@@ -17,6 +17,7 @@ export const getApps = async ({ options, baseURL }) =>
     })
     .catch(err => {
       console.log(err)
+      return { errorMsg: `Error: ${err}`, type: 'danger' }
     })
 
 export const getBTs = async ({ applicationNames, options, baseURL }) => {

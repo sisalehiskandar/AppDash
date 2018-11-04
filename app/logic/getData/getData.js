@@ -10,6 +10,12 @@ export default async ({ selects, wheres, options, baseURL }) => {
   const firstSelect = selects[0].value
 
   const allApplications = await getApps({ options, baseURL })
+
+  // if it failed
+  if (allApplications.errorMsg) {
+    return allApplications
+  }
+
   const filteredApplications = filterData({
     data: allApplications,
     wheres,

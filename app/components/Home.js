@@ -38,35 +38,54 @@ export default class Home extends Component {
       stacked,
       dashboardName: dashboardNameWithDefault,
       config,
-    }).then(buildResults => {
-      Promise.all(buildResults).then(results => {
-        console.log(results)
-        if (results.length === 1) {
-          const { msg, type, dashboardLink } = results[0]
-          this.setState({
-            msg,
-            type,
-            dashboardName: dashboardNameWithDefault,
-            dashboardLink,
-            dashboardLinkList: false,
-            deploying: false,
-          })
+    })
+      .then(buildResults => {
+        if (buildResults.type === 'danger') {
+          const { msg, type } = buildResults
+          this.setState({ msg, type, deploying: false })
         } else {
-          const hasError = results.map(({ type }) => type).includes('danger')
-          this.setState({
-            msg: hasError
-              ? results.map(({ msg }) => msg).join()
-              : `Created ${results.length} dashboards successfully!`,
-            type: results.map(({ type }) => type).includes('danger')
-              ? 'danger'
-              : 'success',
-            dashboardLink: results[0].dashboardListLink,
-            dashboardLinkList: true,
-            deploying: false,
-          })
+          Promise.all(buildResults)
+            .then(results => {
+              console.log(results)
+              if (results.length === 1) {
+                const { msg, type, dashboardLink } = results[0]
+                this.setState({
+                  msg,
+                  type,
+                  dashboardName: dashboardNameWithDefault,
+                  dashboardLink,
+                  dashboardLinkList: false,
+                  deploying: false,
+                })
+              } else {
+                const hasError = results
+                  .map(({ type }) => type)
+                  .includes('danger')
+                this.setState({
+                  msg: hasError
+                    ? results.map(({ msg }) => msg).join()
+                    : `Created ${results.length} dashboards successfully!`,
+                  type: results.map(({ type }) => type).includes('danger')
+                    ? 'danger'
+                    : 'success',
+                  dashboardLink: results[0].dashboardListLink,
+                  dashboardLinkList: true,
+                  deploying: false,
+                })
+              }
+            })
+            .catch(() => {
+              this.setState({
+                msg: 'Error! Go to View > Toggle Developer Tools > Console',
+                type: 'danger',
+                deploying: false,
+              })
+            })
         }
       })
-    })
+      .catch(() => {
+        console.log('IN PROMISE FRONTEND CATCH')
+      })
 
     this.setState({ deploying: true, msg: '' })
   }
@@ -247,6 +266,14 @@ export default class Home extends Component {
               type="button"
               className="btn btn-primary"
               onClick={this.onSubmit}
+              disabled={
+                !(
+                  this.state &&
+                  this.state.query &&
+                  new RegExp('select', 'i').test(this.state.query) &&
+                  new RegExp('where', 'i').test(this.state.query)
+                )
+              }
             >
               {this.state.deploying ? (
                 <div>
