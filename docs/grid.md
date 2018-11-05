@@ -5,6 +5,12 @@
 
 ![](img/grid-all-applications.png)
 
+## Try Grid Mode
+
+To deploy a dashboard in [Grid Mode](docs/grid.md), pick a sample query (here we picked 'All Applications'), and click 'Deploy Dashboard'.
+
+![](img/gettingstarted-grid.png)
+
 ## Example Queries
 
 - All Applications: `SELECT application, health, art, cpm, epm FROM applications`

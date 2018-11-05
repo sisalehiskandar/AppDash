@@ -1,5 +1,6 @@
 # Template Mode
 
+- [Try Template Mode](#try-template-mode)
 - [Using existing templates](#using-existing-templates)
 - [Adding your own template](#adding-your-own-template)
 - [Limitations](#limitations)
