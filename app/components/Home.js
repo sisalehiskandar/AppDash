@@ -271,7 +271,7 @@ export default class Home extends Component {
                   this.state &&
                   this.state.query &&
                   new RegExp('select', 'i').test(this.state.query) &&
-                  new RegExp('where', 'i').test(this.state.query)
+                  new RegExp('from', 'i').test(this.state.query)
                 )
               }
             >
